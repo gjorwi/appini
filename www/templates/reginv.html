@@ -1,0 +1,53 @@
+<ion-view view-title="{{pageInv}}" cache-view="false" style="background-color: rgba(0,0,0,0.05)">
+  <ion-nav-bar class="base-positive-dark" align-title="left">
+    <ion-nav-buttons side="left">
+      <button class="button icon ion-android-menu button-clear" style="color:white;" menu-toggle="left"> 
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right" >
+      <button class="button icon ion-android-search button-clear" ng-class="{ 'hide': check.val == true }" style="color:white;" ng-click="openModal()"> 
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <div class="tabs-striped tabs-top base-positive tabs-color-light">
+    <div class="tabs base-positive">
+      <a class="tab-item active" ng-class="{ 'active': Swiper.activeIndex === 0 }" ng-click="slideTo(0)">
+        Productos / Servicios
+      </a>
+      <a class="tab-item" ng-class="{ 'active': Swiper.activeIndex === 1 }" ng-click="slideTo(1)">
+        Categorias
+      </a>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <ion-slides slider="slider" options="options">
+      <ion-slide-page>
+        <div ng-include src="'templates/tabinv1.html'">
+        </div>
+      </ion-slide-page>
+      <ion-slide-page>
+        <div ng-include src="'templates/tabinv2.html'">
+        </div>
+      </ion-slide-page>
+    </ion-slides>
+  </ion-content>
+
+<script id="filtro.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="base-positive-dark">
+      <h1 class="title wt">Filtrar por Categoria</h1>
+    </ion-header-bar>
+    <ion-content>
+      	<ion-list>
+      		<ion-radio selected ng-model="choice.categoria" ng-value="''">Todas</ion-radio>
+		 	<ion-radio ng-model="choice.categoria" ng-repeat="categoria in categorias" ng-value="categoria.nomcat">{{categoria.nomcat}}</ion-radio>
+		</ion-list>
+		<div align="center" style="margin:10px;">
+			<button ng-click="closeModal()" class="button button-block base-positive">
+			  Filtrar
+			</button>
+		</div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+</ion-view>

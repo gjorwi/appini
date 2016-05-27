@@ -1,0 +1,44 @@
+<ion-view cache-view="false">
+  <ion-content class="base-positive" >
+    <div class="card" style="box-shadow: 0px 0px 0px white; background-color: rgba(255,255,255,0.0);">
+      <center>
+        <div class="item item-text-wrap" style="margin-top: 2%; background-color: rgba(255,255,255,0.0);">
+          <ion-icon class="light">
+            <span class="paypayio" style="font-size:170px;"></span>
+          </ion-icon>
+          <div style="margin-top: -20px">
+            <p style="font-size: 24px;color:rgba(255,255,255,0.7);font-style: italic">Pyme</p>
+          </div>
+        </div>
+      </center>
+    </div>
+    <div class="card" style="box-shadow: 0px 0px 0px white; background-color: rgba(255,255,255,0.0);">
+    <div class="item item-text-wrap" style="margin-top: 1%;">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Usuario</span>
+        <input type="text" ng-model="logdata.usu">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" ng-model="logdata.pass">
+      </label>
+    </div>
+    </div>
+    <div class="button-bar">
+      <button type="submit" class="button button-full base-positive-dark" style="background-color:#0D47A1; color:white;" ng-click="login()">
+       Ingresar
+      </button>
+      <button class="button button-full button-stable" ng-click="regis()">
+       Registrarse
+      </button>
+    </div>
+    <a class="button button-block button-clear button-light" href="/#/app/menuprin">
+    Olvide mi contraseña
+    </a>
+    </div>
+
+   
+  </ion-content>
+</ion-view>
+

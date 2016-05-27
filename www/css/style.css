@@ -1,0 +1,309 @@
+/* Empty. Add your own CSS if you like */
+.base{
+	background-color: #ECEFF1;
+}
+
+.base-positive{
+	background-color: #8BC34A!important;
+  color:white!important;
+}
+.base-positive-btn{
+  background-color: #fff!important;
+  color:white!important;
+}
+.base-positive-btn:active{
+  background-color: rgba(0,0,0,0.03)!important;
+  color:white!important;
+}
+.base-positive-dark{
+  background-color: #689F38!important;
+  color:white!important;
+}
+.base-positive-light{
+  font-size: 12px!important;
+  background-color: #A0D075!important;
+  color:white!important;
+}
+.tittext{
+  font-size: 15px!important;
+}
+.subtext{
+  color:rgba(0,0,0,0.4)!important;
+  font-size: 12px!important;
+}
+.p-text{
+  font-size: 12px!important;
+}
+.mp-text{
+  margin-top: -5px!important;
+  color:rgba(0,0,0,0.4)!important;
+  font-size: 11px!important;
+}
+.top-bar{
+  padding: 10px;
+  background-color: #e8e8e8;
+}
+.icon-caja{
+  border-radius:3px;padding:5px;font-size: 10px;float:left;margin-left:-5px;margin-right: 10px;
+}
+.fadein{
+  display:block;
+}
+h3{
+  margin: 0!important;
+  padding:0!important;
+}
+@font-face {
+  font-family: 'payioicons';
+  src: url("../fonts/payioicons.eot?806twj");
+  src: url("../fonts/payioicons.eot?806twj#iefix") format("embedded-opentype"), url("../fonts/payioicons.ttf?806twj") format("truetype"), url("../fonts/payioicons.woff?806twj") format("woff"), url("../fonts/payioicons.svg?806twj#payioicons") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="pay"], [class*=" pay"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'payioicons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.payservicios:before {
+  content: "\e900"; }
+
+.payqr-scan:before {
+  content: "\e901"; }
+
+.paybillete:before {
+  content: "\e902"; }
+
+.paypayio:before {
+  content: "\e903"; }
+
+.paybolivares:before {
+  content: "\e904"; }
+
+.paypluscard:before {
+  content: "\e905"; }
+
+ .blank{
+ 	box-shadow: 0px 0px 0px white;
+ 	background-color: rgba(255,255,255,0.0);
+ }
+
+ .calc-btn-card{
+ 	color:white;
+ 	background-color: rgba(255,255,255,0);
+ 	box-shadow: 0px 0px 0px #387ef5;
+ 	margin:4px;
+ }
+input[type=number] {
+  -webkit-text-security: disc; 
+
+}
+ .wt{
+ 	color:white!important;
+ }
+ .wt-l{
+  color:rgba(255,255,255,0.5)!important;
+ }
+.barcodeBox {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center; 
+}
+ .module {
+  background: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.6)), url("../img/profile.jpg") top no-repeat;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6)), url("../img/profile.jpg") top no-repeat;
+  min-height: 200px;
+  margin: 0px;
+  width: 100%; }
+
+.module > header {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: inherit;
+  background-attachment: fixed;
+  margin: 0px; }
+
+.module > header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  background-attachment: fixed;
+  -webkit-filter: blur(12px);
+  filter: blur(12px);
+  -webkit-transform: scale(2) translateY(20px);
+  transform: scale(2) translateY(20px); }
+
+.module > header > h1 {
+  margin: 0;
+  padding: 0px;
+  color: white;
+  position: relative;
+  z-index: 1; }
+
+
+.profile-name {
+  margin-left: 3%;
+  margin-right: 0px;
+  margin-top: 40%;
+  color: white;
+  font-size: 27px;
+  z-index: -1; }
+.repStar{
+  font-size: 30px;
+}
+
+.bank-card{
+  margin:0px;
+  background-color: #387ef5;
+  padding-top: 8%; 
+}
+
+.md-box-shadow{
+box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.test{
+
+  font-size: 200px;
+  color:white;
+}
+
+
+.float-button {
+
+background-color:#4FA7D0;
+opacity: 1;
+color: white;
+border-radius: 50%;
+/*border-radius:15% 0 0 0;*/
+width: 30px;
+padding: 25px;
+font-size: 25px;
+position: fixed;
+bottom: 2%; /* Adjust height */
+right: 5%; /* Adjust position */
+z-index: 1000;
+box-shadow: 0px 1px 6px rgba(20,20,20,0.6);
+}
+.bck{
+  background-color: #FF9800!important;
+}
+.float-button .height_fix {
+  margin-top: 100%;
+  border: 1px solid red;
+}
+
+.float-button .content {
+  position: absolute;
+  left: 0;
+  top: 60%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: -19px;
+  color: white;
+}
+
+.responsive-row{
+ height: 100px;
+
+}
+
+@media(max-width: 330px) {
+    
+
+    .responsive-row{
+
+      height: 77px;
+}
+
+
+
+  }
+
+  @media(max-height: 444px) {
+
+
+.float-button {
+
+background-color:#EF5350;
+opacity: 1;
+color: white;
+border-radius: 50%;
+/*border-radius:15% 0 0 0;*/
+width: 30px;
+padding: 25px;
+font-size: 30px;
+position: fixed;
+bottom: 70%; /* Adjust height */
+right:2%; /* Adjust position */
+z-index: 1000;
+box-shadow: 0px 0px 6px rgba(20,20,20,1);
+}
+
+.float-button .height_fix {
+  margin-top: 100%;
+  border: 1px solid red;
+}
+
+.float-button .content {
+  position: absolute;
+  left: 0;
+  top: 60%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: -20px;
+  color: white;
+}
+
+
+  }
+
+  .float-slide {
+
+background-color:#EF5350;
+opacity: 1;
+color: white;
+//border-radius: 50%;
+/*border-radius:15% 0 0 0;*/
+width: 100%;
+height: 80%;
+padding: 25px;
+font-size: 30px;
+position: fixed;
+bottom: 2%; /* Adjust height */
+right: 2%; /* Adjust position */
+z-index: 1000;
+box-shadow: 0px 0px 6px rgba(20,20,20,1);
+}
+
+.float-slide .height_fix {
+  margin-top: 100%;
+  border: 1px solid red;
+}
+
+.float-slide .content {
+  position: absolute;
+  left: 0;
+  top: 60%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: -20px;
+  color: white;
+}

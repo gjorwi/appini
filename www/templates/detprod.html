@@ -1,0 +1,35 @@
+<ion-view view-title="Detalle Producto" >
+	<ion-nav-bar class="base-positive-dark" align-title="left">
+      <ion-nav-back-button class="wt">
+      </ion-nav-back-button>
+	   
+  	</ion-nav-bar>
+  	<ion-content >
+  		<div class="list card">
+		  <div class="item ">
+			<i class="icon ion-ios-cart" style="color:#666;font-size:30px;" align="center">
+		    </i>
+		    <h2>{{nomprod.nombre}}</h2>
+		    <p>November 05, 1955</p>
+		  </div>
+
+		  <div class="item item-body">
+		    <p style="color:black;">
+		      {{nomprod.detalle}}
+		    </p>
+		    <p>
+		      <a href="#" class="subdued">Precio: {{nomprod.precio}}Bs.</a>
+		      <a href="#" class="subdued">Existencia: {{nomprod.existencia}}</a>
+		    </p>
+		  </div>
+		</div>
+		<div class="button-bar" style="padding:10px;">
+	      <button type="submit" class="button button-full button-assertive" style="color:white;" >
+	       Eliminar
+	      </button>
+	      <button class="button button-full button-positive" >
+	       Editar
+	      </button>
+	    </div>
+	</ion-content >
+</ion-view>

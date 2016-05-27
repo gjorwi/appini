@@ -1,0 +1,49 @@
+<ion-view view-title="Registrar Empresa" >
+	<ion-nav-bar class="base-positive-dark" align-title="left">
+      <ion-nav-back-button class="wt">
+      </ion-nav-back-button>
+	    <ion-nav-buttons side="right" >
+	      <button class="button button-icon icon ion-android-cloud-done" ng-click="register()" style="color:white;" type="submit"></button>
+	    </ion-nav-buttons>
+  	</ion-nav-bar>
+	<ion-content >
+		<div class="list">
+		  <label class="item item-input">
+		    <span class="input-label " ng-class="{ 'assertive':choice.name===''}">Usuario</span>
+		    <input type="text" ng-model="choice.userId">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label " ng-class="{ 'assertive':choice.name===''}">Nombre</span>
+		    <input type="text" ng-model="choice.name">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label " ng-class="{ 'assertive':choice.tiprif===''}">Tipo RIF</span>
+		    <input type="text" ng-click="tiprif()" ng-model="choice.tiprif">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label " ng-class="{ 'assertive':choice.rif===''}">RIF</span>
+		    <input type="tel" required ng-model="choice.rif">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label" ng-class="{ 'assertive':choice.email===''}">Correo Electrónico</span>
+		    <input type="email" ng-model="choice.email">
+		  </label>
+		   <label class="item item-input">
+		    <span class="input-label" ng-class="{ 'assertive':choice.direccion===''}">Dirección</span>
+		    <input type="text" ng-model="choice.direccion">
+		  </label>
+		   <label class="item item-input">
+		    <span class="input-label" ng-class="{ 'assertive':choice.tel===''}">Numero de telefono</span>
+		    <input type="tel" ng-model="choice.tel">
+		  </label>
+		   <label class="item item-input">
+		    <span class="input-label" ng-class="{ 'assertive':choice.password===''}">Contraseña</span>
+		    <input type="number" ng-model="choice.password">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label" ng-class="{ 'assertive':choice.confirmPass===''}">Confirmar contraseña</span>
+		    <input type="number" id="confirmPassword" ng-model="choice.confirmPass">
+		  </label>
+		</div>
+	</ion-content>
+</ion-view>

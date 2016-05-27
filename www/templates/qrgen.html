@@ -1,0 +1,17 @@
+<ion-view view-title="Cobro Generado" >
+	<ion-nav-bar class="base-positive-dark">
+		<ion-nav-back-button class="wt" ng-click="cancelar();">
+		</ion-nav-back-button >
+ 	 </ion-nav-bar>
+	<div class="bar bar-subheader base-positive">
+		<h2 class="title wt"></h2>
+	</div>
+	<ion-content class=" has-subheader base" scroll="false">
+		<div align="center" style="padding:20px;">
+		<h4>{{cont}}</h4>
+		<h4>{{trigger}}</h4>
+		<h4>{{datos.ventaID}}</h4>
+			<qr text="datos.ventaID" size="150"></qr>
+		</div>
+	</ion-content>
+</ion-view>

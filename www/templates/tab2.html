@@ -1,0 +1,37 @@
+<div class="top-bar" style="margin:0px;">
+	<div class="subtext" style="overflow: hidden;">
+		<div style="float:left;padding-top: 5px;">
+			<div style="display: inline;color:rgba(0,0,0,0.4);">
+				N° Ventas
+			</div>
+			<span class="badge base-positive-light">{{counventas}}</span>
+		</div>
+		<div style="float:right;">
+			<label class="item-input-wrapper" style="margin:0px;background-color: #e8e8e8;">
+		    	<i class="icon ion-ios-search placeholder-icon" style="margin:0px;"></i>
+		    	<input type="search" ng-model="search" placeholder="Search" style="margin:0px;height:auto;padding:7px;border-radius: 4px;">
+		  	</label>
+		</div>
+	</div>
+</div>
+<ion-content class="has-header">
+<div class="list">
+	<a class="item hide" ng-class="{ 'fadein': counventas === 0 }">
+		<p class="tittext" style="color:rgba(0,0,0,0.5);">No se han realizado ventas... </p>
+	</a>
+	<a class="item " ng-repeat="venta in dataVentas | filter:search">
+		<i class="icon icon-caja" align="center">
+			<img src="/img/CAJA REGISTRADORA.jpg" style="width:35px;">
+		</i>
+	<div style="float:left;">
+		<p class="tittext">Pagó: {{venta.pagUsu}}</p>
+		<p class="subtext">Bs. {{venta.monto}}</p>
+	</div>
+	<div style="margin-top:-5px;float:right;">
+		<p class="p-text">Fecha</p>
+		<p class="mp-text">{{venta.fecha}}</p>
+		<p class="mp-text">{{venta.status}}</p>
+	</div>
+	</a>
+</div>
+</ion-content>

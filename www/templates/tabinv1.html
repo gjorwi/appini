@@ -1,0 +1,70 @@
+<div class="top-bar sub-text">
+	<div class="subtext" style="overflow: hidden;">
+		<div style="float:left;padding-top: 5px;">
+			
+		</div>
+		<div style="float:right;">
+			<div style="float:right;padding-top: 7px;padding-left: 5px;">
+			Servicios
+			</div>
+			<div style="float:right;">
+				<label class="toggle toggle-energized">
+				
+				   <input type="checkbox" ng-model="check.check" ng-checked="{{check.val}}" ng-change="cambiar(check.check)">
+				   <div class="track" >
+				     <div class="handle"></div>
+				   </div>
+				   
+				</label>
+			</div>
+			<div style="float:right;padding-top: 7px;padding-right: 5px;">
+				Productos
+			</div>
+
+		</div>
+	</div>
+
+</div>
+<div class="list" >
+	<a class="item hide" ng-class="{ 'fadein': counprod === 0 }">
+	    <p class="tittext" style="color:rgba(0,0,0,0.5);">No se ha registrado ningun producto... </p>
+  	</a>
+    <a class="item hide" ng-class="{ 'fadein': tipo === 'producto' }"  ng-repeat="producto in dataVentas" ng-click="detalle(producto)">
+	    <i class="icon base-positive icon-caja" align="center">
+	    	<input type="hidden" value="venta.elem"></input>
+		    <h3 style="color:white;">{{producto.prodId}}</h3>
+	    </i>
+	    <div style="float:left;">
+	    	<p class="tittext">{{producto.nombre}}</p>
+	    	<p class="subtext">Bs. {{producto.precio}}</p>
+	    </div>
+	    <div style="margin-top:-5px;float:right;">
+	    	<p class="p-text">{{producto.existencia}}</p>
+	    	<p class="mp-text"></p>
+	    	<p class="mp-text">- {{producto.descuento}}%</p>
+	    </div>
+  	</a>
+  	<a class="item hide" ng-class="{ 'fadein': tipo === 'servicio' }" ng-repeat="producto in productos | filter:{categoria:srcinv}" href="#/app/detalle">
+	    <i class="icon base-positive icon-caja" align="center">
+	    	<input type="hidden" value="venta.elem"></input>
+		    <h3 style="color:white;">{{producto.idpro}}</h3>
+	    </i>
+	    <div style="float:left;">
+	    	<p class="tittext">{{producto.nompro}}</p>
+	    	<p class="subtext">Bs. {{producto.precio}}</p>
+	    </div>
+	    <div style="margin-top:-5px;float:right;">
+	    	<p class="p-text">{{producto.existencia}}</p>
+	    	<p class="mp-text">{{producto.categoria}}</p>
+	    	<p class="mp-text">- {{producto.descuento}}</p>
+	    </div>
+  	</a>
+
+</div>
+<div class="float-button" ng-class="{ 'bck': tipo === 'servicio' }" ng-click="funcreg(tipo)">
+ <span class="height-fix">
+    <a class="content">
+      <i class="ion-plus"> </i>
+    </a>
+   </span>
+</div>
