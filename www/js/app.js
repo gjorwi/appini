@@ -72,7 +72,11 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
       }
     })
     .state('app.detinvent', {
-      url: '/inventario/detalle',
+      url: '/inventario/detalles',
+      params:{
+        producto:{ dynamic: true }
+      }
+      ,
       views: {
         'menuContent': {
           templateUrl: 'templates/detprod.html',

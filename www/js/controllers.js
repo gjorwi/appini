@@ -373,22 +373,22 @@ socket.on('ventaRegistrado', function(pagreg){
     };
   };
   $scope.detalle = function(producto) {
-    alert(producto);
+    //alert(producto);
     //$scope.nomprod=producto;
-    detalle.detprod=producto;
-    alert(detalle.detprod);
-    $state.go('app.detinvent');
+    //detalle.detprod=producto;
+    //alert(detalle.detprod);
+    $state.go('app.detinvent',{ producto: producto});
   };
   
   
 })
 
-.controller('Detalles', function($scope,$stateParams,$state,$ionicPopup,detalle,userData,$timeout) {
+.controller('Detalles', function($scope,$stateParams,$state,detalle,userData) {
   if (!userData.datos.userId) {
     $state.go('login');
   }
-  alert("detalles");
-      $scope.nomprod=detalle.giveDet();
+  //alert("detalles:"+$stateParams.producto);
+  $scope.nomprod=$stateParams.producto;
 
 })
 .controller('Regpro', function($scope,$stateParams,$state,$ionicPopup,socket,userData) {
