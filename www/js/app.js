@@ -6,7 +6,10 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngCordova','ja.qr','btford.socket-io'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$cordovaPush,$rootScope,userData) {
+       var androidConfig = {
+    "senderID": "982355901696",
+  };
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +22,39 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+
+
+
+   $cordovaPush.register(androidConfig).then(function(result) {
+      //alert(result);
+    }, function(err) {
+      // Error
+    })
+
+    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+      switch(notification.event) {
+        case 'registered':
+          if (notification.regid.length > 0 ) {
+            //alert('registration ID = ' + notification.regid);
+            userData.datos.pushReg = notification.regid;
+          }
+          break;
+
+        case 'message':
+          // this is the actual push notification. its format depends on the data model from the push server
+          alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+          break;
+
+        case 'error':
+          alert('GCM error = ' + notification.msg);
+          break;
+
+        default:
+          alert('An unknown GCM event has occurred');
+          break;
+      }
+    });
   });
 })
 
@@ -94,10 +130,19 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
       }
     })
     .state('app.genCob', {
-      url: '/menuprin/generar',
+      url: '/menuprin/generarcob',
       views: {
         'menuContent': {
-          templateUrl: 'templates/generar.html',
+          templateUrl: 'templates/generarcob.html',
+          controller: 'Princtrl'
+        }
+      }
+    })
+    .state('app.genProd', {
+      url: '/menuprin/generarprod',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/generarprod.html',
           controller: 'Princtrl'
         }
       }

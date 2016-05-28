@@ -1,12 +1,12 @@
 <div class="top-bar" style="margin:0px;">
-	<div class="subtext" style="overflow: hidden;">
-		<div style="float:left;padding-top: 5px;">
+	<div class="row subtext" style="overflow: hidden;padding-bottom:5px;">
+		<div style="width:50%;padding-top: 5px;">
 			<div style="display: inline;color:rgba(0,0,0,0.4);">
 				N° Ventas
 			</div>
 			<span class="badge base-positive-light">{{counventas}}</span>
 		</div>
-		<div style="float:right;">
+		<div>
 			<label class="item-input-wrapper" style="margin:0px;background-color: #e8e8e8;">
 		    	<i class="icon ion-ios-search placeholder-icon" style="margin:0px;"></i>
 		    	<input type="search" ng-model="search" placeholder="Search" style="margin:0px;height:auto;padding:7px;border-radius: 4px;">
@@ -14,7 +14,7 @@
 		</div>
 	</div>
 </div>
-<ion-content class="has-header">
+<ion-content class="has-header" style="margin-top:10px;">
 <div class="list">
 	<a class="item hide" ng-class="{ 'fadein': counventas === 0 }">
 		<p class="tittext" style="color:rgba(0,0,0,0.5);">No se han realizado ventas... </p>

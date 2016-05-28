@@ -10,6 +10,7 @@ angular.module('starter.controllers', [])
   //});
   //alert("menu");
   // Form data for the login modal
+  $scope.menuser = userData.datos.userId;
   $scope.loginData = {};
   $scope.cancelar = function() {
     userData={};
@@ -53,6 +54,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('Login', function($scope,$state,$ionicModal,socket,$ionicHistory, $ionicPopup,userData) {
+
   $scope.choice={};
   $scope.valinput='';
   //alert("login");
@@ -102,6 +104,7 @@ angular.module('starter.controllers', [])
       }
     });
   } 
+  $scope.menuser = userData.datos.userId;
   $scope.regis = function(){
     $state.go('regis');
   } 
@@ -128,6 +131,7 @@ angular.module('starter.controllers', [])
         $scope.choice.confirmPass='';
     }
     else{
+      $scope.choice.registration=userData.datos.pushReg;
       socket.emit('registerEmp',$scope.choice);
       
     }
@@ -147,7 +151,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,ventas,pagoService) {
+.controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,invent,ventas,pagoService) {
   if (!userData.datos.userId) {
     $state.go('login');
   }
@@ -155,9 +159,24 @@ angular.module('starter.controllers', [])
   $scope.genCob = function(){
      $state.go('app.genCob');
   }
+  $scope.genProd = function(){
+     $state.go('app.genProd');
+  }
   $scope.ir = function(){
      $state.go('app.reginv');
   }
+  socket.emit('sqlprod',userData.datos.userId);
+  socket.removeListener('repsqlprod');
+  socket.on('repsqlprod',function(prod){
+    
+    $scope.dataVentas=prod;
+    invent.inventario=prod;
+    if ($scope.dataVentas[0]=='f') {
+      $scope.dataVentas=[];
+    }
+    $scope.counprod=$scope.dataVentas.length;
+    //alert($scope.counprod);
+  });
   $scope.Swiper=null;
   $scope.index = 0;
   $scope.page = 'Cobros';
@@ -282,12 +301,14 @@ socket.on('ventaRegistrado', function(pagreg){
   $scope.cambiar=function(val){
     $scope.check.val=val;
     if (val==false) {
-
+      $scope.pageInv='Productos';
       $scope.tipo="producto";
       $scope.srcfun="srcpro()";
+
       //alert("Productos");
     }
     else{
+      $scope.pageInv='Servicios';
       $scope.tipo="servicio";
       $scope.srcinv='';
       $scope.srcfun="srcinv()";
@@ -318,7 +339,7 @@ socket.on('ventaRegistrado', function(pagreg){
   $scope.detprod='';
   $scope.Swiper=null;
   $scope.index = 0;
-  $scope.pageInv = 'Inventario';
+  $scope.pageInv = 'Productos';
   $scope.options = {
     onSlideChangeEnd: function(swiper){
       if(swiper.activeIndex == 0){
@@ -380,18 +401,36 @@ socket.on('ventaRegistrado', function(pagreg){
     $state.go('app.detinvent',{ producto: producto});
   };
   
-  
 })
 
-.controller('Detalles', function($scope,$stateParams,$state,detalle,userData) {
+.controller('Detalles', function($scope,$stateParams,$state,socket,$ionicHistory,$ionicPopup,detalle,userData) {
   if (!userData.datos.userId) {
     $state.go('login');
   }
+  $scope.showAlert = function() {
+    var alertPopup = $ionicPopup.alert({
+     title: 'Alerta',
+     template: $scope.alertMessage
+    });
+
+    alertPopup.then(function(res) {
+     console.log('El usuario ha confirmado el pago');
+    });
+  };
   //alert("detalles:"+$stateParams.producto);
   $scope.nomprod=$stateParams.producto;
+  $scope.elimprod = function(prodElim) {
+    socket.emit('elimprod',prodElim);
+  };
+  socket.removeListener('repelimprod');
+  socket.on('repelimprod',function(){
+    $scope.alertMessage = 'El producto ha sido eliminado';
+    $scope.showAlert();
+    $ionicHistory.goBack(-1);
+  });
 
 })
-.controller('Regpro', function($scope,$stateParams,$state,$ionicPopup,socket,userData) {
+.controller('Regpro', function($scope,$stateParams,$state,$ionicHistory,$ionicPopup,socket,userData) {
   $scope.regprod={};
   $scope.alertMessage ="Error";
   $scope.showAlert = function() {
@@ -405,7 +444,7 @@ socket.on('ventaRegistrado', function(pagreg){
    };
   $scope.regProd = function(){
     //alert('id:'+$scope.choice.email);
-    $scope.regprod.prodId=userData.datos.userId;
+    $scope.regprod.userId=userData.datos.userId;
     if(!$scope.regprod.nombre|| !$scope.regprod.precio||!$scope.regprod.existencia
       ||!$scope.regprod.detalle){
       $scope.alertMessage = 'Faltan campos por llenar';
@@ -421,7 +460,7 @@ socket.on('ventaRegistrado', function(pagreg){
     });
     socket.removeListener('regOk');
     socket.on('regOk',function(){
-      $scope.alertMessage = 'Producto registrado Exitosamente!';
+      $scope.alertMessage = 'Su producto ha sido registrado Exitosamente!';
       $scope.showAlert();
       $ionicHistory.goBack(-1);
     }); 

@@ -1,0 +1,106 @@
+<ion-view cache-view="false" view-title="Generar Pago" >
+<ion-nav-bar class="base-positive-dark">
+    
+<ion-nav-back-button class="wt">
+    
+</ion-nav-back-button >
+  </ion-nav-bar>
+<div class="bar bar-subheader base-positive">
+  <h2 class="title wt">Introduzca monto a generar</h2>
+</div>
+<ion-content class=" has-subheader base" scroll="false">
+
+<div class="item item-divider" style="background-color: rgba(255,255,255,0); padding: 0px;">
+   <div class="card calc-btn-card" style=" margin:0px; padding:0px;">
+      <div class="item item-text-wrap calc-btn-card">
+        <div class="row" style="padding:0px;">
+            <div class="col col-90" >
+              <h1  style="text-align: center;">Bs. {{actualPago}}</h1>
+            </div>
+            <div class="col" style="visibility: hidden;">
+              <button class="button icon button-clear button-light ion-backspace" ng-click="restar()"  ></button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row responsive-row" >
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(1)">
+    
+<h1 class="wt">1</h1>
+
+  </div>
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(2)">
+    
+<h1 class="wt">2</h1>
+
+  </div>
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(3)">
+    
+<h1 class="wt">3</h1>
+
+  </div>
+ 
+</div>
+<div class="row responsive-row" >
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(4)">
+    
+<h1 class="wt">4</h1>
+
+  </div>
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(5)">
+    
+<h1 class="wt">5</h1>
+
+  </div>
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(6)">
+    
+<h1 class="wt">6</h1>
+
+  </div>
+ 
+</div>
+<div class="row responsive-row" >
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(7)">
+    
+<h1 class="wt">7</h1>
+
+  </div>
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(8)">
+    
+<h1 class="wt">8</h1>
+
+  </div>
+  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(9)">
+    
+<h1 class="wt">9</h1>
+
+  </div>
+ 
+</div>
+<div class="row responsive-row" >
+  <div class="col button button-assertive button-large" style=" padding-top: 5%; margin: 1px; font-size: 80px; border-radius: 0px;" ng-click="restar()">
+    
+<i class="icon ion-backspace" ></i>
+
+  </div>
+  <div class="col button button-positive button-large" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(0)">
+    
+<h1 class="wt">0</h1>
+
+  </div>
+  <div class="col button button-balanced button-large" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="qrGen()">
+    
+<h1 class="test"><i class="icon ion-arrow-return-right" ></i></h1>
+
+  </div>
+ 
+</div>
+
+</ion-content>
+<!--<div class="bar bar-footer bar-balanced" style="padding: 0px;" >
+  <button class="button button-full icon-right ion-chevron-right button-assertive" style="margin: 0px;" ng-click="qrGen()"> Confirnmar pago</button>
+</div>-->
+
+</ion-view>
