@@ -2,7 +2,23 @@
 .base{
 	background-color: #ECEFF1;
 }
-
+.mi{
+  display:none;
+}
+.fontval{
+  font-size: 25px;
+}
+.fontval1{
+  font-size: 20px;
+}
+.gris{
+  color:rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.06);
+}
+.azul{
+  color:rgba(0,0,0,0.7);
+  background-color: #FFD751;
+}
 .base-positive{
 	background-color: #8BC34A!important;
   color:white!important;
@@ -104,7 +120,6 @@ h3{
  }
 input[type=number] {
   -webkit-text-security: disc; 
-
 }
  .wt{
  	color:white!important;

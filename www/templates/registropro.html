@@ -17,6 +17,10 @@
 		</div>
 		<div class="list">
 		  <label class="item item-input" style="padding:15px 15px;">
+		    <span class="input-label">Foto</span>
+		    <input type="text" ng-model="regprod.nombre">
+		  </label>
+		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Nombre</span>
 		    <input type="text" ng-model="regprod.nombre">
 		  </label>
@@ -24,9 +28,18 @@
 		    <span class="input-label">Precio</span>
 		    <input type="tel" ng-model="regprod.precio" ng-keyup="transf()">
 		  </label>
+		  <label class="item item-input" ng-click="tipInvent()" style="padding:15px 15px;">
+		  	<span class="input-label " ng-class="{ 'assertive':regprod.existencia===''}">Inventario</span>
+		    <div  style="width:100%;background-color:;">{{choice.tiprif}}</div>
+		    <input type="hidden"  ng-model="regprod.existencia">
+		  </label>
 		  <label class="item item-input" style="padding:15px 15px;">
-		    <span class="input-label">Excistencia</span>
-		    <input type="text" ng-model="regprod.existencia">
+		    <span class="input-label">Cantidad</span>
+		    <input type="number" ng-model="regprod.descuento">
+		  </label>
+		  <label class="item item-input" style="padding:15px 15px;">
+		    <span class="input-label">Unidad Medida</span>
+		    <input type="text" ng-model="regprod.descuento">
 		  </label>
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Descuento</span>

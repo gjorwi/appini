@@ -88,7 +88,6 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
     }
   })
 
-  
     .state('app.playlists', {
       url: '/playlists',
       views: {
@@ -104,6 +103,15 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
         'menuContent': {
           templateUrl: 'templates/registropro.html',
           controller: 'Regpro'
+        }
+      }
+    })
+    .state('app.histcob', {
+      url: '/menuprin/generarcob/histcob',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/histcob.html',
+          controller: 'Princtrl'
         }
       }
     })
@@ -148,7 +156,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
       }
     })
     .state('app.qrGen', {
-      url: '/menuprin/generar/qr',
+      url: '/menuprin/generarcob/qr',
       views: {
         'menuContent': {
           templateUrl: 'templates/qrgen.html',

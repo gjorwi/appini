@@ -1,104 +1,208 @@
-<ion-view cache-view="false" view-title="Generar Pago" >
-<ion-nav-bar class="base-positive-dark">
-    
-<ion-nav-back-button class="wt">
-    
-</ion-nav-back-button >
+<ion-view cache-view="false" view-title="Generar Cobro" >
+  <ion-nav-bar class="base-positive-dark">
+    <ion-nav-buttons side="right" >
+        <button class="button button-icon icon ion-ios-cart-outline" ng-click="historial()" style="color:white;" type="submit">
+        </button>
+    </ion-nav-buttons>   
+    <ion-nav-back-button class="wt">
+    </ion-nav-back-button >
   </ion-nav-bar>
-<div class="bar bar-subheader base-positive">
-  <h2 class="title wt">Introduzca monto a generar</h2>
-</div>
-<ion-content class=" has-subheader base" scroll="false">
 
-<div class="item item-divider" style="background-color: rgba(255,255,255,0); padding: 0px;">
-   <div class="card calc-btn-card" style=" margin:0px; padding:0px;">
-      <div class="item item-text-wrap calc-btn-card">
-        <div class="row" style="padding:0px;">
-            <div class="col col-90" >
-              <h1  style="text-align: center;">Bs. {{actualPago}}</h1>
-            </div>
-            <div class="col" style="visibility: hidden;">
-              <button class="button icon button-clear button-light ion-backspace" ng-click="restar()"  ></button>
-            </div>
+<div style="margin-top:50px;">
+  <div class="base-positive" style="border:1px solid rgba(0,0,0,0.2);padding:0px 5px;margin:0px 5px;">
+    <div class="row" style="padding:0px;">
+        <div class="col" ng-click="reset()" style="padding-top:10px;border-right:1px solid rgba(255,255,255,0.1);">
+          <h2 class="fontval" style="text-align: center;color:#fff;">{{totalPago | currency:'Bs. '}}</h2>
+        </div>
+        <div class="col col-33 text-center" ng-click="qrGen()" style="border-left:1px solid rgba(0,0,0,0.1);margin:0px;margin-right:-5px;padding-top:15px;background-color:rgba(0,0,0,0.06);">
+          <span style="font-size:18px;color:#fff;font-weight:100;">Cobrar <i class="icon ion-forward" style="color:#FFD751;font-size:25px;"></i></span>
+        </div>
+    </div>
+  </div>
+</div>
+  <div class="row" style="padding:5px;">
+    <div class="base-positive-dark text-center" ng-click="switch(0)" style="width:50%;padding:15px;">
+      <i class="icon ion-calculator" style="font-size:27px;margin-right:5px;"></i>Teclado
+    </div>
+    <div class="base-positive-dark text-center" ng-click="switch(1)" style="width:50%;padding:15px;">
+      <i class="icon ion-bag" style="font-size:25px;margin-right:5px;"></i>Items
+    </div>
+  </div>
+  <div class="row hide" ng-class="{ 'fadein': opcion === 0 }" style="padding:5px;margin-top:2px;">
+    <div class="row" style="background-color:white;border-left:1px solid rgba(0,0,0,0.1);border-top:1px solid rgba(0,0,0,0.1);border-right:1px solid rgba(0,0,0,0.2);border-bottom:1px solid rgba(0,0,0,0.2);">
+      <div class="text-center" style="width:50%;padding:5px;">
+        <div ng-click="showPopup()" class="{{class1}}" style="padding:5px;border-bottom:1px solid rgba(0,0,0,0.2);border-right:1px solid rgba(0,0,0,0.1);">
+        <div class="hide" ng-class="{ 'fadein': class1 === 'gris' }" >Añadir Nota</div>
+        <div class="hide" ng-class="{ 'fadein': class1 === 'azul' }" >Editar Nota</div>
         </div>
       </div>
+      <div class="text-center" style="font-size:16px;color:#666;width:50%;padding:5px;padding-top:10px;">
+       {{actualPago | currency:'Bs. '}}
+      </div>
     </div>
+  </div>
+
+  <div class="row hide" ng-class="{ 'fadein': opcion === 1 }" style="padding:5px;">
+    <div class="row" style="background-color:white;border-right:1px solid rgba(0,0,0,0.2);border-bottom:1px solid rgba(0,0,0,0.2);">
+      <div class="text-center" style="width:30%;padding:5px;padding-right:15px;color:rgba(0,0,0,0.4);">
+        <label class="item-input-wrapper" style="margin:0px;background-color: #e8e8e8;">
+            <i class="icon ion-ios-search placeholder-icon" style="margin:0px;"></i>
+            <input type="search" ng-model="search" placeholder="Search" style="margin:0px;height:auto;padding:7px;border-radius: 4px;width:120px;">
+          </label>
+      </div>
+      <div class="text-center" style="font-size:16px;color:#666;width:70%;padding:5px;">
+        <div class="subtext" style="overflow: hidden;">
+      <div style="float:left;padding-top: 5px;">
+        
+      </div>
+      <div style="float:right;">
+        <div style="float:right;padding-top: 7px;padding-left: 5px;">
+        Servicios
+        </div>
+        <div style="float:right;">
+          <label class="toggle toggle-energized">
+          
+             <input type="checkbox" ng-model="check.check" ng-checked="{{check.val}}" ng-change="cambiar(check.check)">
+             <div class="track" >
+               <div class="handle"></div>
+             </div>
+             
+          </label>
+        </div>
+        <div style="float:right;padding-top: 7px;padding-right: 5px;">
+          Productos
+        </div>
+
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+<ion-content class="mi" ng-class="{ 'fadein': opcion === 0 }" style="margin-top:205px;border-top:1px solid rgba(0,0,0,0.1);">
+<!--  /////////////////////////// Teclado Numerico ///////////////////////////////   -->
+<div class="mi" ng-class="{ 'fadein': opcion === 0 }" style="margin-top:-5px;">
+  <div class="row responsive-row" >
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(1)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">1</h1>
+
+    </div>
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(2)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">2</h1>
+
+    </div>
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(3)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">3</h1>
+
+    </div>
+   
+  </div>
+  <div class="row responsive-row" >
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(4)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">4</h1>
+
+    </div>
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(5)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">5</h1>
+
+    </div>
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(6)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">6</h1>
+
+    </div>
+   
+  </div>
+  <div class="row responsive-row" >
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(7)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">7</h1>
+
+    </div>
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(8)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">8</h1>
+
+    </div>
+    <div class="col button " style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(9)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">9</h1>
+
+    </div>
+   
+  </div>
+  <div class="row responsive-row" >
+    <div class="col button button-assertive button-large" style=" padding-top: 5%; margin: 1px; font-size: 80px; border-radius: 0px;" ng-click="restar()">
+      
+  <i class="icon ion-backspace" ></i>
+
+    </div>
+    <div class="col button  button-large" style=" padding-top: 5%; margin: 1px; border-radius: 0px;border:1px solid rgba(0,0,0,0.1);" ng-click="sum(0)">
+      
+  <h1 style="color:rgba(0,0,0,0.35);">0</h1>
+
+    </div>
+    <div class="col button button-balanced button-large" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sumtotal()">
+      
+  <h1 class="test"><i class="icon ion-android-add" ></i></h1>
+
+    </div>
+   
+  </div>
 </div>
+<!--  /////////////////////////// FIN Teclado Numerico ///////////////////////////////   -->
+</ion-content>
+<ion-content class="mi" ng-class="{ 'fadein': opcion === 1 }" style="margin-top:205px;border-top:1px solid rgba(0,0,0,0.1);">
+    <div class="mi" ng-class="{ 'fadein': opcion === 1 }">
+        <div class="list">
 
-<div class="row responsive-row" >
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(1)">
-    
-<h1 class="wt">1</h1>
+          <a class="item hide" ng-class="{ 'fadein': counprod === 0 }">
+            <p class="tittext" style="color:rgba(0,0,0,0.5);">No se ha registrado ningun producto... </p>
+          </a>
+          <a class="item hide" ng-class="{ 'fadein': tipo === 'producto' }" ng-click="sumarprod(producto)"  ng-repeat="producto in dataVentas | filter:search" >
+            <i class="icon base-positive icon-caja" align="center">
+              <input type="hidden" value="venta.elem"></input>
+              <h3 style="color:white;">{{producto.prodId}}</h3>
+            </i>
+            <div style="float:left;">
+              <p class="tittext">{{producto.nombre}}</p>
+              <p class="subtext">Bs. {{producto.precio}}</p>
+            </div>
+            <div style="margin-top:-5px;float:right;">
+              <p class="p-text">{{producto.existencia}}</p>
+              <p class="mp-text"></p>
+              <p class="mp-text">- {{producto.descuento}}%</p>
+            </div>
+          </a>
+<!--       //////////////////////////////// Servicios //////////////////////////////          -->
+          <a class="item hide" ng-class="{ 'fadein': tipo === 'servicio' }">
+            <p class="tittext" style="color:rgba(0,0,0,0.5);">No se ha registrado ningun Servicio... </p>
+          </a>
+          <a class="item hide" ng-class="{ 'fadein': tipo === 'servicio' }" ng-click="sumarserv(servicio)"  ng-repeat="servicio in dataServic" >
+            <i class="icon base-positive icon-caja" align="center">
+              <input type="hidden" value="venta.elem"></input>
+              <h3 style="color:white;">{{servicio.servId}}</h3>
+            </i>
+            <div style="float:left;">
+              <p class="tittext">{{servicio.nombre}}</p>
+              <p class="subtext">Bs. {{servicio.precio}}</p>
+            </div>
+            <div style="margin-top:-5px;float:right;">
+              <p class="p-text">{{servicio.existencia}}</p>
+              <p class="mp-text"></p>
+              <p class="mp-text">- {{servicio.descuento}}%</p>
+            </div>
+          </a>
 
-  </div>
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(2)">
-    
-<h1 class="wt">2</h1>
-
-  </div>
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(3)">
-    
-<h1 class="wt">3</h1>
-
-  </div>
- 
-</div>
-<div class="row responsive-row" >
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(4)">
-    
-<h1 class="wt">4</h1>
-
-  </div>
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(5)">
-    
-<h1 class="wt">5</h1>
-
-  </div>
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(6)">
-    
-<h1 class="wt">6</h1>
-
-  </div>
- 
-</div>
-<div class="row responsive-row" >
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(7)">
-    
-<h1 class="wt">7</h1>
-
-  </div>
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(8)">
-    
-<h1 class="wt">8</h1>
-
-  </div>
-  <div class="col button button-positive" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(9)">
-    
-<h1 class="wt">9</h1>
-
-  </div>
- 
-</div>
-<div class="row responsive-row" >
-  <div class="col button button-assertive button-large" style=" padding-top: 5%; margin: 1px; font-size: 80px; border-radius: 0px;" ng-click="restar()">
-    
-<i class="icon ion-backspace" ></i>
-
-  </div>
-  <div class="col button button-positive button-large" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="sum(0)">
-    
-<h1 class="wt">0</h1>
-
-  </div>
-  <div class="col button button-balanced button-large" style=" padding-top: 5%; margin: 1px; border-radius: 0px;" ng-click="qrGen()">
-    
-<h1 class="test"><i class="icon ion-arrow-return-right" ></i></h1>
-
-  </div>
- 
-</div>
+        </div>
+    </div>
 
 </ion-content>
+
 <!--<div class="bar bar-footer bar-balanced" style="padding: 0px;" >
   <button class="button button-full icon-right ion-chevron-right button-assertive" style="margin: 0px;" ng-click="qrGen()"> Confirnmar pago</button>
 </div>-->

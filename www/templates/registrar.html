@@ -16,9 +16,10 @@
 		    <span class="input-label " ng-class="{ 'assertive':choice.name===''}">Nombre</span>
 		    <input type="text" ng-model="choice.name">
 		  </label>
-		  <label class="item item-input">
+		  <label class="item item-input" ng-click="tiprif()">
 		    <span class="input-label " ng-class="{ 'assertive':choice.tiprif===''}">Tipo RIF</span>
-		    <input type="text" ng-click="tiprif()" ng-model="choice.tiprif">
+		    <div ng-click="tiprif()" style="width:100%;background-color:;">{{choice.tiprif}}</div>
+		    <input type="hidden"  ng-model="choice.tiprif">
 		  </label>
 		  <label class="item item-input">
 		    <span class="input-label " ng-class="{ 'assertive':choice.rif===''}">RIF</span>

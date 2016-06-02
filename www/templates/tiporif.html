@@ -4,15 +4,10 @@
 	</ion-header-bar>
 	<ion-content>
 	  	<ion-list>
-	  		<ion-radio selected ng-model="choice.tiprif" ng-value="'J - Juridico'">J - Juridico</ion-radio>
-	  		<ion-radio ng-model="choice.tiprif" ng-value="'V - Personal'">V - Personal</ion-radio>
-		 	<ion-radio ng-model="choice.tiprif" ng-value="'C - Consejo Comunal'">C - Consejo Comunal</ion-radio>
-		 	<ion-radio ng-model="choice.tiprif" ng-value="'G - Gubernamental'">G - Gubernamental</ion-radio>
+	  		<ion-radio ng-click="closeModal()" selected ng-model="choice.tiprif" ng-value="'J - Juridico'">J - Juridico</ion-radio>
+	  		<ion-radio ng-click="closeModal()" ng-model="choice.tiprif" ng-value="'V - Personal'">V - Personal</ion-radio>
+		 	<ion-radio ng-click="closeModal()" ng-model="choice.tiprif" ng-value="'C - Consejo Comunal'">C - Consejo Comunal</ion-radio>
+		 	<ion-radio ng-click="closeModal()" ng-model="choice.tiprif" ng-value="'G - Gubernamental'">G - Gubernamental</ion-radio>
 		</ion-list>
-		<div align="center" style="margin:10px;">
-			<button ng-click="closeModal()" class="button button-block base-positive">
-			  Aceptar
-			</button>
-		</div>
 	</ion-content>
 </ion-modal-view>

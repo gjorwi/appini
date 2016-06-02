@@ -130,6 +130,12 @@ angular.module('starter.controllers', [])
         $scope.choice.password ='';
         $scope.choice.confirmPass='';
     }
+    else if($scope.choice.password.length<=6){
+        $scope.alertMessage = 'Las contraseñas debe contener al menos 6 caracteres.';
+        $scope.showAlert();
+        $scope.choice.password ='';
+        $scope.choice.confirmPass='';
+    }
     else{
       $scope.choice.registration=userData.datos.pushReg;
       socket.emit('registerEmp',$scope.choice);
@@ -151,9 +157,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,invent,ventas,pagoService) {
+.controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,$ionicPopup,histcob,invent,ventas,pagoService) {
   if (!userData.datos.userId) {
     $state.go('login');
+  }
+  $scope.opcion=0;
+  $scope.switch = function(val){
+    $scope.opcion=val;
   }
   //alert('hola');
   $scope.genCob = function(){
@@ -220,12 +230,27 @@ angular.module('starter.controllers', [])
     //alert(JSON.parse(ventas));
   });
 ///////////////////////////////////////GENERAR COBRO///////////////////////////////////////
-
+$scope.search = '';
+$scope.counthist=histcob.givecounthist();
+$scope.addtext='Pago Especial';
 $scope.pago = 0.00;
 $scope.multiplo = 10;
 $scope.oldNumber = 0.00;
 $scope.actualPago = '0.00';
-$scope.totalPago = {};
+$scope.totalPagomu=0.00;
+$scope.totalPago = '0.00';
+$scope.conthist=0;
+if (histcob.totcob) {
+  //alert('hay historial');
+  $scope.totalPagomu = histcob.totcob;
+  $scope.totalPago = histcob.totcob;
+
+}
+
+$scope.histPago=histcob.cob;
+$scope.histPagoext=histcob.cob.filter(function(a){
+      return typeof a !== 'undefined';
+    });;
 $scope.date = new Date();
  $scope.datescope = $filter('date')(new Date(), 'short');
 //$scope.total = 
@@ -236,7 +261,7 @@ $scope.string = "hola prueba generar";
     if($scope.oldNumber<0.01){
       $scope.pago = number;
       $scope.oldNumber = number;
-      $scope.actualPago = $scope.pago.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      $scope.actualPago = $scope.pago;
 
     }
 
@@ -249,34 +274,196 @@ $scope.string = "hola prueba generar";
       $scope.pago = x.toFixed(2);
       $scope.oldNumber = $scope.pago;
 
-         $scope.actualPago = $scope.pago.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         $scope.actualPago = $scope.pago;
          //pagoService.pago = $scope.actualPago;
     }
 
   }
+  $scope.class1="gris";
+  $scope.data = {};
+  $scope.showPopup = function() {
+  
 
+  // An elaborate, custom popup
+  var myPopup = $ionicPopup.show({
+    template: '<div class="row"><label style="margin-top:10px;font-weight:bold;">Info.:</label><input type="text" style="padding-left:5px;border-bottom:1px solid #6282FF;background-color:rgba(0,0,0,0);" ng-model="data.coment"></div>',
+    title: 'Nota Adicional',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Añadir</b>',
+        type: 'button-positive',
+        onTap: function(e) {
+          if (!$scope.data.coment) {
+            //don't allow the user to close unless he enters wifi password
+            e.preventDefault();
+          } else {
+            return $scope.data.coment;
+          }
+        }
+      }
+    ]
+  });
+  myPopup.then(function(res) {
+    $scope.addtext=res
+    if (res!=null || res!=undefined) {
+      $scope.class1="azul";
+    }
+    else{
+      $scope.data={};
+      $scope.class1="gris";
 
+    }
+    console.log('Tapped!', res);
+  });
+ };
+ $scope.check={
+    val:'false',
+    check:"input"
+  };
+  $scope.tipo="producto";
+  $scope.cambiar=function(val){
+    $scope.check.val=val;
+    if (val==false) {
+      $scope.pageInv='Productos';
+      $scope.tipo="producto";
+      $scope.search='';
+      //alert("Productos");
+    }
+    else{
+      $scope.pageInv='Servicios';
+      $scope.tipo="servicio";
+      $scope.search='';
+      //alert("Servicios");
+    };
+  }
+  $scope.reset = function(){
+    $scope.addtext='Pago Especial';
+    $scope.pago = 0.00;
+    $scope.multiplo = 10;
+    $scope.oldNumber = 0.00;
+    $scope.actualPago = '0.00';
+    $scope.totalPagomu=0.00;
+    $scope.totalPago = '0.00';
+    histcob.cob=[];
+    histcob.totcob='';
+    $scope.histPago=[];
+    $scope.data = {};
+    $scope.class1="gris";
+    $scope.conthist=0;
+  }
+  $scope.contHist=function(){
+
+    if ($scope.histPago.length>0) {
+      $scope.conthist=$scope.histPago.length;
+    }
+    else{
+      $scope.conthist=0;
+    }
+    //alert('contador'+$scope.conthist);
+    return $scope.conthist;
+    
+  };
+  $scope.sumtotal = function(){
+
+    //alert($scope.totalPagomu);
+    //alert($scope.actualPago);
+    $scope.totalPagomu =parseFloat($scope.totalPagomu) + parseFloat($scope.actualPago);
+    var y=$scope.totalPagomu;
+    //alert($scope.totalPagomu);
+    $scope.totalPagomu = y.toFixed(2);
+    //alert($scope.totalPagomu);
+    var paso=$scope.totalPagomu;
+    $scope.totalPago=paso.toString();
+    histcob.totcob=$scope.totalPago;
+    if (!$scope.addtext) {
+      $scope.addtext='Pago especial'
+    }
+    var cont=$scope.contHist();
+    $scope.histPago.push({idhist:cont,coment:$scope.addtext,precio:$scope.actualPago});
+    histcob.cob=$scope.histPago;
+    $scope.class1="gris";
+    $scope.pago = 0.00;
+    //this.multiplo = 0.01;
+    $scope.oldNumber = 0.00;
+    $scope.actualPago ='0.00';
+    $scope.data = {};
+  }
   $scope.restar = function(){
+    $scope.pago = 0.00;
+    //this.multiplo = 0.01;
+    $scope.oldNumber = 0.00;
+    $scope.actualPago ='0.00';
+  }
+$scope.deletCob = function(hitorial){
+  //alert(idcob);
+  for(i in $scope.histPago){
+    if ($scope.histPago[i].idhist==hitorial.idhist) {
+      delete $scope.histPago[i];
+       $scope.histPagoext=$scope.histPago;
+      histcob.counthist=$scope.histPago.length;
+      $scope.histPagoext=$scope.histPagoext.filter(function(a){
+        return typeof a !== 'undefined';
+      });
+      //$scope.histPago.splice(i,1);
+      histcob.totcob=$scope.totalPago-hitorial.precio;
+      $scope.totalPago=histcob.totcob;
+      var temp=$scope.histPago.filter(function(a){
+        return typeof a !== 'undefined';
+      });
+      histcob.counthist=temp.length;
+      $scope.counthist=temp.length;
+    }
+  }
+}
+$scope.sumarprod = function(productocob){
+  //alert($scope.totalPagomu);
+  //alert($scope.actualPago);
+  $scope.totalPagomu =parseFloat($scope.totalPagomu) + parseFloat(productocob.precio);
+  var y=$scope.totalPagomu;
+  //alert($scope.totalPagomu);
+  $scope.totalPagomu = y.toFixed(2);
+  //alert($scope.totalPagomu);
+  var paso=$scope.totalPagomu;
+  $scope.totalPago=paso.toString();
+  histcob.totcob=$scope.totalPago;
+  var cont=$scope.contHist();
+  $scope.histPago.push({idhist:cont,coment:productocob.nombre,precio:productocob.precio});
+  histcob.cob=$scope.histPago;
   $scope.pago = 0.00;
   //this.multiplo = 0.01;
   $scope.oldNumber = 0.00;
-   $scope.actualPago ='0.00';
-}
+  $scope.data = {};
+  $scope.actualPago ='0.00';
+  }
+  $scope.historial = function(){
 
+    $scope.histPagoext=$scope.histPago;
+    //alert($scope.histPagoext);
+    histcob.counthist=$scope.histPago.length;
+    $scope.histPagoext=$scope.histPagoext.filter(function(a){
+      return typeof a !== 'undefined';
+    });
+    //alert($scope.histPagoext);
+    $state.go('app.histcob');
+  } 
+ 
 $scope.comapunto = function(){
   $scope.actualPago = $scope.actualPago.replace(/,/g,'.');
   alert($scope.actualPago);
 }
 
 $scope.qrGen = function(){
-//alert(userData.datos.userId);
-$scope.totalPago = {id:userData.datos.userId, monto:$scope.actualPago, fecha:$scope.datescope};
-socket.emit('genVenta', $scope.totalPago);
-socket.on('ventaRegistrado', function(pagreg){
-  pagoService.pago=pagreg;
-  $state.go('app.qrGen');
-});
-
+  
+  //alert(userData.datos.userId);
+  $scope.totalPagoGen = {id:userData.datos.userId, monto:$scope.totalPago, fecha:$scope.datescope};
+  socket.emit('genVenta', $scope.totalPagoGen);
+  socket.on('ventaRegistrado', function(pagreg){
+    pagoService.pago=pagreg;
+    $scope.reset();
+    $state.go('app.qrGen');
+  });
 }
 
 ///////////////////////////////////////GENERAR COBRO///////////////////////////////////////
@@ -508,7 +695,7 @@ socket.on('ventaRegistrado', function(pagreg){
       });
        $scope.cont++;
       
-    }, 30000);
+    }, 60000);
   }
   $scope.time();
   $scope.cancelar=function(){

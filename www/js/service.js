@@ -32,6 +32,21 @@ angular.module('starter.service', [])
  		return this.inventario;
  	}
 })
+.service('histcob', function(){
+ this.cob = [];
+ this.cobext = [];
+ this.totcob='';
+ this.counthist=0;
+
+ 	this.giveHistcob = function(){
+
+ 		return this.cob;
+ 	}
+ 	this.givecounthist = function(){
+
+ 		return this.counthist;
+ 	}
+})
 .service('detalle', function(){
  this.detprod = {};
 
