@@ -1,0 +1,12 @@
+<ion-modal-view>
+	<ion-header-bar class="base-positive-dark">
+	  <h1 class="title wt">Seleccione Tipo Inventario</h1>
+	</ion-header-bar>
+	<ion-content>
+	  	<ion-list>
+	  		<ion-radio ng-click="closeModal()" selected ng-model="regprod.existencia" ng-value="'Por Pedido'">Por Pedido</ion-radio>
+	  		<ion-radio ng-click="closeModal()" ng-model="regprod.existencia" ng-value="'Existencia'">Existencia</ion-radio>
+		 	<ion-radio ng-click="closeModal()" ng-model="regprod.existencia" ng-value="'Por Paquete'">Por Paquete</ion-radio>
+		</ion-list>
+	</ion-content>
+</ion-modal-view>

@@ -1,4 +1,4 @@
-<ion-view view-title="Registro de producto" align-title="center">
+<ion-view view-title="Registro de producto" align-title="center" >
 	<ion-nav-bar class="base-positive-dark" align-title="left">
       <ion-nav-back-button class="wt">
       </ion-nav-back-button>
@@ -16,10 +16,12 @@
 			</div>
 		</div>
 		<div class="list">
+		<!--
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Foto</span>
-		    <input type="text" ng-model="regprod.nombre">
+		    <input type="text">
 		  </label>
+		  -->
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Nombre</span>
 		    <input type="text" ng-model="regprod.nombre">
@@ -28,19 +30,38 @@
 		    <span class="input-label">Precio</span>
 		    <input type="tel" ng-model="regprod.precio" ng-keyup="transf()">
 		  </label>
-		  <label class="item item-input" ng-click="tipInvent()" style="padding:15px 15px;">
-		  	<span class="input-label " ng-class="{ 'assertive':regprod.existencia===''}">Inventario</span>
-		    <div  style="width:100%;background-color:;">{{choice.tiprif}}</div>
-		    <input type="hidden"  ng-model="regprod.existencia">
+		  <label class="item item-input item-select" style="padding:15px 15px;">
+		    <div class="input-label">
+		      Inventario
+		    </div>
+		    <select ng-model="regprod.existencia">
+		      <option selected ng-value="1">Por Pedido</option>
+		      <option ng-value="2">Existencia</option>
+		      <option ng-value="3">Por Paquete</option>
+		    </select>
 		  </label>
-		  <label class="item item-input" style="padding:15px 15px;">
-		    <span class="input-label">Cantidad</span>
-		    <input type="number" ng-model="regprod.descuento">
+		  <div class="" >
+			  <label class="item item-input hide" ng-class="{'fadein': regprod.existencia == 2}"  style="padding:15px 15px;">
+
+			    <span class="input-label" style="display:inline-block;">Cantidad</span>
+			    <input type="tel" style="display:inline-block;" ng-model="regprod.cantidad1">
+			  </label>
+		  </div>
+		  <label class="item item-input item-select hide" ng-class="{'fadein': regprod.existencia == 3}" style="padding:15px 15px;">
+		    <div class="input-label">
+		      Unidad Medida
+		    </div>
+		    <select ng-model="regprod.unidad">
+		      <option ng-repeat="unidad in unidades" ng-value="{{unidad.val}}">{{unidad.val}}</option>
+		    </select>
 		  </label>
-		  <label class="item item-input" style="padding:15px 15px;">
-		    <span class="input-label">Unidad Medida</span>
-		    <input type="text" ng-model="regprod.descuento">
-		  </label>
+		  <div class="" >
+			  <label class="item item-input hide" ng-class="{'fadein': regprod.existencia == 3}"  style="padding:15px 15px;">
+
+			    <span class="input-label" style="display:inline-block;">Cantidad</span>
+			    <input type="tel" style="display:inline-block;" ng-model="regprod.cantidad">
+			  </label>
+		  </div>
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Descuento</span>
 		    <input type="text" ng-model="regprod.descuento">%

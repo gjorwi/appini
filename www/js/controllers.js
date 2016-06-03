@@ -617,8 +617,15 @@ $scope.qrGen = function(){
   });
 
 })
-.controller('Regpro', function($scope,$stateParams,$state,$ionicHistory,$ionicPopup,socket,userData) {
+.controller('Regpro', function($scope,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,socket,userData) {
+  if (!userData.datos.userId) {
+    $state.go('login');
+  }
   $scope.regprod={};
+  $scope.unidades=[{
+    val:'KM'},{val:'CAJA'},{val:'BULTO'},{val:'LTS'},{val:'K'},{val:'MTS'},{val:'PULG'},{val:'PACK'},{val:'CM'},
+  {val:'CM2'},{val:'CM3'},{val:'MTS2'},{val:'MTS3'}
+  ];
   $scope.alertMessage ="Error";
   $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
@@ -630,11 +637,21 @@ $scope.qrGen = function(){
      });
    };
   $scope.regProd = function(){
-    //alert('id:'+$scope.choice.email);
+    //alert('existencia:'+$scope.regprod.precio);
     $scope.regprod.userId=userData.datos.userId;
     if(!$scope.regprod.nombre|| !$scope.regprod.precio||!$scope.regprod.existencia
       ||!$scope.regprod.detalle){
-      $scope.alertMessage = 'Faltan campos por llenar';
+      $scope.alertMessage = 'Faltan campos por llenar.';
+      $scope.showAlert();
+    }
+    else if($scope.regprod.existencia==2 && !$scope.regprod.cantidad1){
+      $scope.alertMessage = 'Debe ingresar una cantidad.';
+      $scope.showAlert();
+    }else if($scope.regprod.existencia==3 && !$scope.regprod.cantidad){
+      $scope.alertMessage = 'Debe ingresar una cantidad.';
+      $scope.showAlert();
+    }else if($scope.regprod.existencia==3 && !$scope.regprod.unidad){
+      $scope.alertMessage = 'Debe Seleccionar una unidad.';
       $scope.showAlert();
     }
     else{
@@ -715,5 +732,10 @@ $scope.qrGen = function(){
     $ionicHistory.goBack(-1);
 
 });
+ 
+})
+
+.controller('Resumen', function($scope,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
+  
  
 })

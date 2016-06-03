@@ -146,21 +146,21 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.service','ngC
         }
       }
     })
-    .state('app.genProd', {
-      url: '/menuprin/generarprod',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/generarprod.html',
-          controller: 'Princtrl'
-        }
-      }
-    })
     .state('app.qrGen', {
       url: '/menuprin/generarcob/qr',
       views: {
         'menuContent': {
           templateUrl: 'templates/qrgen.html',
           controller: 'Scanpag'
+        }
+      }
+    })
+    .state('app.resumen', {
+      url: '/resumen',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/resumen.html',
+          controller: 'Resumen'
         }
       }
     })
