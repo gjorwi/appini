@@ -381,7 +381,7 @@ $scope.string = "hola prueba generar";
       $scope.addtext='Pago especial'
     }
     var cont=$scope.contHist();
-    $scope.histPago.push({idhist:cont,coment:$scope.addtext,precio:$scope.actualPago});
+    $scope.histPago.push({idhist:cont,coment:$scope.addtext,precio:$scope.actualPago,tipo:'otro'});
     histcob.cob=$scope.histPago;
     $scope.class1="gris";
     $scope.pago = 0.00;
@@ -429,7 +429,7 @@ $scope.sumarprod = function(productocob){
   $scope.totalPago=paso.toString();
   histcob.totcob=$scope.totalPago;
   var cont=$scope.contHist();
-  $scope.histPago.push({idhist:cont,coment:productocob.nombre,precio:productocob.precio});
+  $scope.histPago.push({idhist:cont,coment:productocob.nombre,precio:productocob.precio,tipo:'item'});
   histcob.cob=$scope.histPago;
   $scope.pago = 0.00;
   //this.multiplo = 0.01;
@@ -455,9 +455,12 @@ $scope.comapunto = function(){
 }
 
 $scope.qrGen = function(){
+  $scope.histPagoGen=$scope.histPago.filter(function(a){
+      return typeof a !== 'undefined';
+    });
+  //alert($scope.histPagoGen);
   
-  //alert(userData.datos.userId);
-  $scope.totalPagoGen = {id:userData.datos.userId, monto:$scope.totalPago, fecha:$scope.datescope};
+  $scope.totalPagoGen = {id:userData.datos.userId, monto:$scope.totalPago, fecha:$scope.datescope,histpag:angular.toJson($scope.histPagoGen)};
   socket.emit('genVenta', $scope.totalPagoGen);
   socket.on('ventaRegistrado', function(pagreg){
     pagoService.pago=pagreg;
@@ -735,7 +738,52 @@ $scope.qrGen = function(){
  
 })
 
-.controller('Resumen', function($scope,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
-  
- 
+.controller('Resumen', function($scope,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout,userData) {
+  $scope.ingresos=0;
+  $scope.balance=0;
+  $scope.ingresosItems=0;
+  $scope.ingresosServicios=0;
+  $scope.ingresosOtros=0;
+  socket.emit('balance',userData.datos);
+  socket.removeListener('repbalance');
+  socket.on('repbalance',function(bal){
+    //alert("hola");
+    $scope.balance=bal;
+  });
+  socket.emit('ingresos',userData.datos);
+  socket.removeListener('repingresos');
+  socket.on('repingresos',function(ing){
+    //alert("hola");
+    $scope.dataIngresos=ing;
+    if ($scope.dataIngresos[0]=='f') {
+      $scope.dataIngresos=[];
+      $scope.ingresos=0;
+      $scope.ingresosItems=0;
+      $scope.ingresosServicios=0;
+      $scope.ingresosOtros=0;
+      //alert("hola"+$scope.ingresos);
+    }
+    else{
+      //alert('else');
+      for(i in $scope.dataIngresos){
+        //alert('for 1');
+        //alert($scope.dataIngresos[i].histpag);
+        var histpag=JSON.parse($scope.dataIngresos[i].histpag);
+        //alert(histpag);
+        //console.log(histpag.length);
+        for(j in histpag){
+          //console.log("for 2");
+          if (histpag[j].tipo=='item') {
+            $scope.ingresosItems+=parseFloat(histpag[j].precio);
+          }
+          else{
+            $scope.ingresosOtros+=parseFloat(histpag[j].precio);
+          }
+        }
+        $scope.ingresos+=parseFloat($scope.dataIngresos[i].monto);
+      }
+      //console.log($scope.ingresosItems);
+      //console.log($scope.ingresosOtros);
+    }
+  });
 })

@@ -7,20 +7,20 @@
   </ion-nav-bar>
   <div class="trans" style="border:none!important;margin-top:50px;">
     <div class="grafic" align="center">
-     <h1 style="color:rgba(0,0,0,0.3);">GRAFICA</h1>
+     <h1 class="font-rcl" style="color:rgba(0,0,0,0.3);">GRAFICA</h1>
     </div>
     <div class="row cash-resumen" style="background-color:rgba(0,0,0,0.06);padding:5px 0px;">
       <div class="col col-33 item-cash-resumen">
-        <h5 style="font-size:12px;color:white;">RETIROS</h5>
-        <h4 style="color:white;">Bs <span style="font-weight:300;color:white;">500</span></h4>
+        <h5 class="font-rcl" style="font-size:12px;color:white;">RETIROS</h5>
+        <h4 class="font-rcl" style="color:white;"><span class="font-rcl" style="font-weight:300;color:white;">{{'0' | currency:'Bs '}}</span></h4>
       </div>
       <div class="col col-33 item-cash-resumen">
-        <h5 style="font-size:14px;color:white;">BALANCE</h5>
-        <h4 style="color:white;">Bs <span style="font-weight:300;color:white;">500,500</span></h4>
+        <h5 class="font-rcl" style="font-size:15px;color:white;">BALANCE</h5>
+        <h4 class="font-rcl" style="color:white;"><span class="font-rcl" style="font-weight:300;color:white;">{{balance | currency:'Bs '}}</span></h4>
       </div>
       <div class="col col-33 item-cash-resumen">
-        <h5 style="font-size:12px;color:white;">INGRESOS</h5>
-        <h4 style="color:white;">Bs <span style="font-weight:300;color:white;">110,200</span></h4>
+        <h5 class="font-rcl" style="font-size:12px;color:white;">INGRESOS</h5>
+        <h4 class="font-rcl" style="color:white;"><span class="font-rcl" style="font-weight:300;color:white;">{{ingresos | currency:'Bs '}}</span></h4>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@
         <p style="margin:0px;padding:5px 0px;color:rgba(0,0,0,0.4);">16sept</p>
       </div>
       <div class="col bar-resumen">
-        <p style="margin:0px;color:rgba(0,0,0,0.5);font-size:16px;background-color:#B8E462;border-radius:10px;padding:5px;">HOY</p>
+        <p class="font-rcl" style="margin:0px;color:rgba(0,0,0,0.5);font-size:18px;background-color:#B8E462;border-radius:10px;padding:5px;">HOY</p>
       </div>
       <div class="col bar-resumen">
         <p style="margin:0px;padding:5px 0px;color:rgba(0,0,0,0.4);">17sep</p>
@@ -51,7 +51,7 @@
         <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Comida - Bebida</p>
       </div>
       <div style="width:30%;font-weight:bold;padding:20px 15px;color:#4A9C2C;">
-        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">Bs 500</p>
+        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">{{ingresosItems | currency:'Bs '}}</p>
         <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Ingreso</p>
       </div>
     </div>
@@ -64,7 +64,20 @@
         <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Comida - Bebida</p>
       </div>
       <div style="width:30%;font-weight:bold;padding:20px 15px;color:#4A9C2C;">
-        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">Bs 500</p>
+        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">{{ingresosServicios | currency:'Bs '}}</p>
+        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Ingreso</p>
+      </div>
+    </div>
+    <div class="row" style="border-bottom:1px solid rgba(0,0,0,0.1);padding:0px;">
+      <div style="width:15%;padding:20px 15px;color:rgba(0,0,0,0.7);">
+        <i class="icon ion-ios-list-outline" style="color:#D7D728;font-size:30px;"></i>
+      </div>
+      <div style="width:55%;font-weight:bold;padding:20px 15px;color:rgba(0,0,0,0.8);">
+        <p style="margin:0px;font-size:14px;padding:0px;">OTROS</p>
+        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Pago Especial</p>
+      </div>
+      <div style="width:30%;font-weight:bold;padding:20px 15px;color:#4A9C2C;">
+        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">{{ingresosOtros | currency:'Bs '}}</p>
         <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Ingreso</p>
       </div>
     </div>
