@@ -9,6 +9,42 @@
 .trans:active{
   background-color: rgba(0,0,0,0);
 }
+.padd{
+  padding:20px 15px;
+}
+.padd-ico{
+  padding:20px 15px;
+}
+.font-monto-list{
+  font-size:15px;
+  margin:0px;
+  padding:0px;
+  font-weight:100;
+}
+.font-fec{
+  margin:0px;
+  padding:5px 0px;
+  color:rgba(0,0,0,0.4);
+}
+.font-fec-hoy{
+  margin:0px;
+  color:rgba(0,0,0,0.5);
+  font-size:18px;
+  background-color:#B8E462;
+  border-radius:10px;
+  padding:5px;
+}
+.font-resum-list{
+  margin:0px;
+  font-size:14px;
+  padding:0px;
+}
+.font-resum-det{
+  margin:0px;
+  font-weight:100;
+  padding:0px;
+  color:rgba(0,0,0,0.8);
+}
 .it-resum{
   display:block;
   color:white;
@@ -26,6 +62,9 @@
 .it-border-bottom{
   border-bottom:1px solid rgba(0,0,0,0.1)!important;
 }
+.icon-resum{
+  font-size:30px;
+}
 .resumen-prin{
   color:white;
   background:linear-gradient(#B8E462 -10%,#8BC34A 10%,#4A9C2C 70%);
@@ -33,14 +72,27 @@
   background:-o-linear-gradient(#B8E462 -10%,#8BC34A 10%,#4A9C2C 70%);
   background:-moz-linear-gradient(#B8E462 -10%,#8BC34A 10%,#4A9C2C 70%);
 }
-.grafic{
-  padding-top:50px;
-  height:200px;
+.font-resum-12{
+  font-size:12px;color:white;
+}
+.font-resum-15{
+  font-size:15px;color:white;
+}
+.font-monto{
+  font-weight:300;color:white;
+}
+.graficss{
+  height:170px;
+  display: hidden;
+}
+.graf{
+  border:none!important;margin-top:50px;
 }
 .cash-resumen{
   color:white;
   padding:0px;
-
+  background-color:rgba(0,0,0,0.06);
+  padding:5px 0px;
 }
 .bar-resumen{
   padding:10px;
@@ -52,6 +104,10 @@
 .cont-resumen{
   margin-top: 300px;
   background-color: white;
+
+}
+.bar-resum-fec{
+  background-color:rgba(0,0,0,0.1);border-bottom:0.5px solid rgba(0,0,0,0.2);
 }
 .mi{
   display:none;
@@ -71,7 +127,30 @@
   background-color: #FFD751;
 }
 .base-positive{
-	background-color: #8BC34A!important;
+  background-color: #DD2651!important;
+  color:white!important;
+}
+.color-base{
+  color:#E9486D!important;
+}
+.top-marg-resum{
+  margin-top:80px;
+}
+.base-positive-prin{
+  background:linear-gradient(#E9486D -10%,#DD2651 10%,#9D1734 90%);
+  background:-webkit-linear-gradient(#E9486D -10%,#DD2651 10%,#9D1734 90%);
+  background:-o-linear-gradient(#E9486D -10%,#DD2651 10%,#9D1734 90%);
+  background:-moz-linear-gradient(#E9486D -10%,#DD2651 10%,#9D1734 90%);
+  color:white!important;
+}
+.marg{
+  margin-top:40px;
+}
+.base-positive-resum{
+  background:linear-gradient(#E9486D -5%,#DD2651 20%,#9D1734 60%);
+  background:-webkit-linear-gradient(#E9486D -5%,#DD2651 20%,#9D1734 60%);
+  background:-o-linear-gradient(#E9486D -5%,#DD2651 20%,#9D1734 60%);
+  background:-moz-linear-gradient(#E9486D -5%,#DD2651 20%,#9D1734 60%);
   color:white!important;
 }
 .base-positive-btn{
@@ -83,12 +162,12 @@
   color:white!important;
 }
 .base-positive-dark{
-  background-color: #689F38!important;
+  background-color: #9D1734!important;
   color:white!important;
 }
 .base-positive-light{
   font-size: 12px!important;
-  background-color: #A0D075!important;
+  background-color: #E9486D!important;
   color:white!important;
 }
 .tittext{
@@ -397,13 +476,188 @@ box-shadow: 0px 0px 6px rgba(20,20,20,1);
   margin-top: -20px;
   color: white;
 }
+.icon-login{
+  font-size:170px;
+}
+.font-pyme{
+  font-size: 24px!important;
+  color:rgba(255,255,255,0.7)!important;
+  font-style: italic;
+}
+.font-olv-cont{
+  font-size: 16px;
+  color:white!important;
+}
+.color{
+  display: block;
+  padding:10px;
+  color:#666;
+}
+.resaltar{
+  background-color:#5E8B90;
+  color:white;
+}
+.font-in-reg{
+  font-size: 16px;
+}
 @media(max-width: 321px) {
+  .top-marg-resum{
+    margin-top:50px;
+  }
+  .marg{
+    margin-top:0px;
+  }
+  .graficss{
+    height:150px;
+    display: hidden;
+  }
+  .padd-usu{
+    padding-top:0;
+  }
+  .padd-pass{
+    padding-bottom:0;
+  }
+  .font-in-reg{
+    font-size: 14px;
+  }
+  .font-olv-cont{
+    font-size: 14px;
+  }
+  .font-pyme{
+    font-size: 18px!important;
+  }
+  .icon-login{
+    font-size:130px;
+  }
   .grafic{
     padding-top:50px;
     height:150px;
   }
   .cont-resumen{
-    margin-top: 250px;
+    margin-top: 230px;
   }
-  
+  .font-resum-12{
+    font-size:11px;color:white;
+  }
+  .font-resum-15{
+    font-size:14px;color:white;
+  }
+  .font-monto{
+    font-size:15px;
+    font-weight:300;color:white;
+  }
+  .cash-resumen{
+    padding:0px 0px;
+  }
+  .font-fec{
+    margin:0px;
+    padding:0px 0px;
+    color:rgba(0,0,0,0.4);
+    font-size: 12px;
+  }
+  .font-fec-hoy{
+    font-size:15px;
+    background-color:#B8E462;
+    border-radius:10px;
+    padding:2px;
+  }
+  .icon-resum{
+    font-size:25px;
+  }
+  .font-resum-list{
+    margin:0px;
+    font-size:12px;
+    padding:0px;
+  }
+  .font-resum-det{
+    margin:0px;
+    font-weight:100;
+    padding:0px;
+    color:rgba(0,0,0,0.8);
+    font-size: 12px;
+  }
+  .font-monto-list{
+    font-size:13px;
+    margin:0px;
+    padding:0px;
+    font-weight:100;
+  }
+  .padd{
+    padding:15px 15px;
+  }
+  .padd-ico{
+    padding:20px 15px;
+  }
+}
+@media(min-width: 700px) {
+  .grafic{
+    padding-top:50px;
+    height:305px;
+  }
+  .cont-resumen{
+    margin-top: 450px;
+  }
+  .font-resum-12{
+    font-size:30px;color:white;
+  }
+  .font-resum-15{
+    font-size:35px;color:white;
+  }
+  .font-monto{
+    font-size:35px;
+    font-weight:300;color:white;
+  }
+  .cash-resumen{
+    padding:5px 0px;
+  }
+  .bar-resum-fec{
+    border-bottom:0.5px solid rgba(0,0,0,0.2);
+    padding:15px 0px;
+  }
+  .font-fec{
+    margin:0px;
+    padding:15px 0px;
+    color:rgba(0,0,0,0.4);
+    font-size: 30px;
+  }
+  .font-fec-hoy{
+    font-size:35px;
+    background-color:#B8E462;
+    border-radius:20px;
+    padding:15px;
+  }
+  .icon-resum{
+    font-size:60px;
+  }
+  .font-resum-list{
+    margin:0px;
+    font-size:30px;
+    padding:0px;
+  }
+  .font-resum-det{
+    margin:0px;
+    font-weight:100;
+    padding:0px;
+    color:rgba(0,0,0,0.8);
+    font-size: 28px;
+    line-height: 50px;
+  }
+  .font-monto-list{
+    font-size:27px;
+    margin:0px;
+    padding:0px;
+    font-weight:100;
+  }
+  .padd{
+    padding:40px 25px;
+  }
+  .padd-ico{
+    padding:40px 35px;
+  }
+  .graf{
+   margin-top:0px;
+  }
+  .grafic{
+    height:auto;
+  }
 }

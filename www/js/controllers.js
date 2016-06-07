@@ -158,9 +158,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,$ionicPopup,histcob,invent,ventas,pagoService) {
-  if (!userData.datos.userId) {
-    $state.go('login');
-  }
+  
+
   $scope.opcion=0;
   $scope.switch = function(val){
     $scope.opcion=val;
@@ -286,7 +285,7 @@ $scope.string = "hola prueba generar";
 
   // An elaborate, custom popup
   var myPopup = $ionicPopup.show({
-    template: '<div class="row"><label style="margin-top:10px;font-weight:bold;">Info.:</label><input type="text" style="padding-left:5px;border-bottom:1px solid #6282FF;background-color:rgba(0,0,0,0);" ng-model="data.coment"></div>',
+    template: '<div class="row"><label style="margin-top:10px;font-weight:bold;">Info:</label><input type="text" style="padding-left:5px;border-bottom:1px solid #6282FF;background-color:rgba(0,0,0,0);" ng-model="data.coment"></div>',
     title: 'Nota Adicional',
     scope: $scope,
     buttons: [
@@ -786,4 +785,12 @@ $scope.qrGen = function(){
       //console.log($scope.ingresosOtros);
     }
   });
+  $scope.labels = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+  $scope.series = ['serie A'];
+  $scope.data = [
+    [1650, 1590, 1810]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
 })

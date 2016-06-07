@@ -1,10 +1,10 @@
 <ion-view cache-view="false" view-title="Generar Cobro" >
-  <ion-nav-bar class="base-positive-dark">
+  <ion-nav-bar class="color-base">
     <ion-nav-buttons side="right" >
-        <button class="button button-icon icon ion-ios-cart-outline" ng-click="historial()" style="color:white;" type="submit">
+        <button class="button button-icon icon ion-ios-cart-outline color-base" ng-click="historial()" type="submit">
         </button>
     </ion-nav-buttons>   
-    <ion-nav-back-button class="wt">
+    <ion-nav-back-button class="color-base">
     </ion-nav-back-button >
   </ion-nav-bar>
 
@@ -14,30 +14,30 @@
         <div class="col" ng-click="reset()" style="padding-top:10px;border-right:1px solid rgba(255,255,255,0.1);">
           <h2 class="fontval" style="text-align: center;color:#fff;">{{totalPago | currency:'Bs. '}}</h2>
         </div>
-        <div class="col col-33 text-center" ng-click="qrGen()" style="border-left:1px solid rgba(0,0,0,0.1);margin:0px;margin-right:-5px;padding-top:15px;background-color:rgba(0,0,0,0.06);">
+        <div class="col col-33 text-center base-positive-dark" ng-click="qrGen()" style="border-left:1px solid rgba(0,0,0,0.1);margin:0px;margin-right:-5px;padding-top:12px;">
           <span style="font-size:18px;color:#fff;font-weight:100;">Cobrar <i class="icon ion-forward" style="color:#FFD751;font-size:25px;"></i></span>
         </div>
     </div>
   </div>
 </div>
   <div class="row" style="padding:5px;">
-    <div class="base-positive-dark text-center" ng-click="switch(0)" style="width:50%;padding:15px;">
-      <i class="icon ion-calculator" style="font-size:27px;margin-right:5px;"></i>Teclado
+    <div class="text-center" ng-click="switch(0)" style="border-right:1px solid rgba(0,0,0,0.1);background-color:rgba(0,0,0,0.06);width:50%;padding:15px;">
+      <i class="icon ion-calculator color-base" style="font-size:27px;margin-right:5px;"></i>Teclado
     </div>
-    <div class="base-positive-dark text-center" ng-click="switch(1)" style="width:50%;padding:15px;">
-      <i class="icon ion-bag" style="font-size:25px;margin-right:5px;"></i>Items
+    <div class="text-center" ng-click="switch(1)" style="background-color:rgba(0,0,0,0.06);width:50%;padding:15px;">
+      <i class="icon ion-bag color-base" style="font-size:25px;margin-right:5px;"></i>Items
     </div>
   </div>
   <div class="row hide" ng-class="{ 'fadein': opcion === 0 }" style="padding:5px;margin-top:2px;">
-    <div class="row" style="background-color:white;border-left:1px solid rgba(0,0,0,0.1);border-top:1px solid rgba(0,0,0,0.1);border-right:1px solid rgba(0,0,0,0.2);border-bottom:1px solid rgba(0,0,0,0.2);">
-      <div class="text-center" style="width:50%;padding:5px;">
-        <div ng-click="showPopup()" class="{{class1}}" style="padding:5px;border-bottom:1px solid rgba(0,0,0,0.2);border-right:1px solid rgba(0,0,0,0.1);">
-        <div class="hide" ng-class="{ 'fadein': class1 === 'gris' }" >Añadir Nota</div>
-        <div class="hide" ng-class="{ 'fadein': class1 === 'azul' }" >Editar Nota</div>
+    <div class="row" style="background-color:rgba(0,0,0,0.06);">
+      <div class="text-center" style="width:50%;padding-right:2px;">
+        <div ng-click="showPopup()" class="base-positive {{class1}} " style="padding:9px;border-bottom:1px solid rgba(0,0,0,0.2);border-right:1px solid rgba(0,0,0,0.1);">
+          <div class="hide" ng-class="{ 'fadein': class1 === 'gris' }" >Añadir Nota</div>
+          <div class="hide" ng-class="{ 'fadein': class1 === 'azul' }" >Editar Nota</div>
         </div>
       </div>
-      <div class="text-center" style="font-size:16px;color:#666;width:50%;padding:5px;padding-top:10px;">
-       {{actualPago | currency:'Bs. '}}
+      <div class="text-center" style="padding-left:2px;font-size:16px;color:#666;width:50%;">
+       <a class="color" ng-class="{ 'resaltar': actualPago != 0 }" >{{actualPago | currency:'Bs. '}}</a>
       </div>
     </div>
   </div>

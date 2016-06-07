@@ -31,9 +31,8 @@
 	    <p class="tittext" style="color:rgba(0,0,0,0.5);">No se ha registrado ningun producto... </p>
   	</a>
     <a class="item hide" ng-class="{ 'fadein': tipo === 'producto' }"  ng-repeat="producto in dataVentas" ng-click="detalle(producto)">
-	    <i class="icon base-positive icon-caja" align="center">
-	    	<input type="hidden" value="venta.elem"></input>
-		    <h3 style="color:white;">{{producto.prodId}}</h3>
+	    <i class="icon icon-caja" align="center" style="padding-top:0px;">
+	    	<i class="icon ion-bag color-base" style="font-size:35px;"></i>
 	    </i>
 	    <div style="float:left;">
 	    	<p class="tittext" style="font-size:15px;">{{producto.nombre}}</p>

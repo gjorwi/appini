@@ -1,84 +1,87 @@
-<ion-view view-title="Resumen" cache-view="false" class="resumen-prin">
-  <ion-nav-bar class="trans" align-title="center">
+<ion-view view-title="Resumen" cache-view="false" class="base-positive-resum">
+  <ion-nav-bar class="color-base" align-title="center">
     <ion-nav-buttons side="left">
-      <button class="button icon ion-android-menu button-clear" style="color:white;" menu-toggle="left"> 
+      <button class="button icon ion-android-menu button-clear color-base" menu-toggle="left"> 
       </button>
     </ion-nav-buttons>
   </ion-nav-bar>
-  <div class="trans" style="border:none!important;margin-top:50px;">
-    <div class="grafic" align="center">
-     <h1 class="font-rcl" style="color:rgba(0,0,0,0.3);">GRAFICA</h1>
+  <div class="trans graf top-marg-resum">
+    <div class="graficss" align="center">
+      <canvas id="line" class="chart chart-line" chart-data="data"
+        chart-labels="labels" chart-legend="false" chart-series="false"
+        chart-click="onClick" >
+      </canvas>
     </div>
-    <div class="row cash-resumen" style="background-color:rgba(0,0,0,0.06);padding:5px 0px;">
+    <div class="row cash-resumen">
       <div class="col col-33 item-cash-resumen">
-        <h5 class="font-rcl" style="font-size:12px;color:white;">RETIROS</h5>
-        <h4 class="font-rcl" style="color:white;"><span class="font-rcl" style="font-weight:300;color:white;">{{'0' | currency:'Bs '}}</span></h4>
+        <h5 class="font-rcl font-resum-12">RETIROS</h5>
+        <h4 class="font-rcl font-monto">{{'0' | currency:'Bs '}}</h4>
       </div>
       <div class="col col-33 item-cash-resumen">
-        <h5 class="font-rcl" style="font-size:15px;color:white;">BALANCE</h5>
-        <h4 class="font-rcl" style="color:white;"><span class="font-rcl" style="font-weight:300;color:white;">{{balance | currency:'Bs '}}</span></h4>
+        <h5 class="font-rcl font-resum-15">BALANCE</h5>
+        <h4 class="font-rcl font-monto" >{{balance | currency:'Bs '}}</h4>
       </div>
       <div class="col col-33 item-cash-resumen">
-        <h5 class="font-rcl" style="font-size:12px;color:white;">INGRESOS</h5>
-        <h4 class="font-rcl" style="color:white;"><span class="font-rcl" style="font-weight:300;color:white;">{{ingresos | currency:'Bs '}}</span></h4>
+        <h5 class="font-rcl font-resum-12">INGRESOS</h5>
+        <h4 class="font-rcl font-monto">{{ingresos | currency:'Bs '}}</h4>
       </div>
     </div>
   </div>
   <ion-content class="cont-resumen">
-    <div class="row" align="center" style="background-color:rgba(0,0,0,0.1);border-bottom:0.5px solid rgba(0,0,0,0.2);">
+    <div class="row bar-resum-fec" align="center">
       <div class="col bar-resumen">
-        <p style="margin:0px;padding:5px 0px;color:rgba(0,0,0,0.4);">15sep</p>
+        <p class="font-fec">15sep</p>
       </div>
       <div class="col bar-resumen">
-        <p style="margin:0px;padding:5px 0px;color:rgba(0,0,0,0.4);">16sept</p>
+        <p class="font-fec" >16sept</p>
       </div>
       <div class="col bar-resumen">
-        <p class="font-rcl" style="margin:0px;color:rgba(0,0,0,0.5);font-size:18px;background-color:#B8E462;border-radius:10px;padding:5px;">HOY</p>
+        <p  class="font-rcl font-fec-hoy">HOY</p>
       </div>
       <div class="col bar-resumen">
-        <p style="margin:0px;padding:5px 0px;color:rgba(0,0,0,0.4);">17sep</p>
+        <p class="font-fec" >17sep</p>
       </div>
       <div class="col bar-resumen">
-        <p style="margin:0px;padding:5px 0px;color:rgba(0,0,0,0.4);">18sep</p>
+        <p class="font-fec" >18sep</p>
       </div>
     </div>
     <div class="row" style="border-bottom:1px solid rgba(0,0,0,0.1);padding:0px;">
-      <div style="width:15%;padding:20px 15px;color:rgba(0,0,0,0.7);">
-        <i class="icon ion-bag" style="color:#4CB2B0;font-size:30px;"></i>
+      <div class="padd-ico" style="width:15%;color:rgba(0,0,0,0.7);">
+        <i class="icon ion-bag icon-resum" style="color:#4CB2B0;"></i>
       </div>
-      <div style="width:55%;font-weight:bold;padding:20px 15px;color:rgba(0,0,0,0.8);">
-        <p style="margin:0px;font-size:14px;padding:0px;">ITEMS</p>
-        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Comida - Bebida</p>
+      <div class="padd" style="width:55%;font-weight:bold;color:rgba(0,0,0,0.8);">
+        <p class="font-resum-list">ITEMS</p>
+        <p class="font-resum-det">Comida - Bebida</p>
       </div>
-      <div style="width:30%;font-weight:bold;padding:20px 15px;color:#4A9C2C;">
-        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">{{ingresosItems | currency:'Bs '}}</p>
-        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Ingreso</p>
-      </div>
-    </div>
-    <div class="row" style="border-bottom:1px solid rgba(0,0,0,0.1);padding:0px;">
-      <div style="width:15%;padding:20px 15px;color:rgba(0,0,0,0.7);">
-        <i class="icon ion-hammer" style="color:#E15E95;font-size:30px;"></i>
-      </div>
-      <div style="width:55%;font-weight:bold;padding:20px 15px;color:rgba(0,0,0,0.8);">
-        <p style="margin:0px;font-size:14px;padding:0px;">SERVICIOS</p>
-        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Comida - Bebida</p>
-      </div>
-      <div style="width:30%;font-weight:bold;padding:20px 15px;color:#4A9C2C;">
-        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">{{ingresosServicios | currency:'Bs '}}</p>
-        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Ingreso</p>
+      <div class="padd" style="width:30%;font-weight:bold;color:#4A9C2C;">
+        <p class="font-rcl font-monto-list">{{ingresosItems | currency:'Bs '}}</p>
+        <p class="font-resum-det">Ingreso</p>
       </div>
     </div>
     <div class="row" style="border-bottom:1px solid rgba(0,0,0,0.1);padding:0px;">
-      <div style="width:15%;padding:20px 15px;color:rgba(0,0,0,0.7);">
-        <i class="icon ion-ios-list-outline" style="color:#D7D728;font-size:30px;"></i>
+      <div class="padd-ico" style="width:15%;color:rgba(0,0,0,0.7);">
+        <i class="icon ion-hammer icon-resum" style="color:#E15E95;"></i>
       </div>
-      <div style="width:55%;font-weight:bold;padding:20px 15px;color:rgba(0,0,0,0.8);">
-        <p style="margin:0px;font-size:14px;padding:0px;">OTROS</p>
-        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Pago Especial</p>
+      <div class="padd" style="width:55%;font-weight:bold;color:rgba(0,0,0,0.8);">
+        <p class="font-resum-list">SERVICIOS</p>
+        <p class="font-resum-det">Comida - Bebida</p>
       </div>
-      <div style="width:30%;font-weight:bold;padding:20px 15px;color:#4A9C2C;">
-        <p style="font-size:15px;margin:0px;padding:0px;font-weight:100;">{{ingresosOtros | currency:'Bs '}}</p>
-        <p style="margin:0px;font-weight:100;padding:0px;color:rgba(0,0,0,0.8);">Ingreso</p>
+      <div class="padd" style="width:30%;font-weight:bold;color:#4A9C2C;">
+        <p class="font-rcl font-monto-list">{{ingresosServicios | currency:'Bs '}}</p>
+        <p class="font-resum-det">Ingreso</p>
+      </div>
+    </div>
+    <div class="row" style="border-bottom:1px solid rgba(0,0,0,0.1);padding:0px;">
+      <div class="padd-ico" style="width:15%;color:rgba(0,0,0,0.7);">
+        <i class="icon ion-ios-list-outline icon-resum" style="color:#D7D728;"></i>
+      </div>
+      <div class="padd" style="width:55%;font-weight:bold;color:rgba(0,0,0,0.8);">
+        <p class="font-resum-list">OTROS</p>
+        <p class="font-resum-det">Pago Especial</p>
+      </div>
+      <div class="padd" style="width:30%;font-weight:bold;color:#4A9C2C;">
+        <p class="font-rcl font-monto-list">{{ingresosOtros | currency:'Bs '}}</p>
+        <p class="font-resum-det">Ingreso</p>
       </div>
     </div>
   </ion-content>
