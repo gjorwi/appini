@@ -60,14 +60,14 @@ angular.module('starter.controllers', [])
   //alert("login");
   $ionicModal.fromTemplateUrl('templates/tiporif.html', {
     scope: $scope,
-    animation: 'slide-in-up'
+    animation: 'slide-in-up',
   }).then(function(modal) {
     $scope.modal = modal;
   });
   $scope.alertMessage ="Error";
   $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
-       title: 'Alerta',
+       title: '<p class="font-inp-login">Alerta</p>',
        template: $scope.alertMessage
      });
 
@@ -251,7 +251,10 @@ $scope.histPagoext=histcob.cob.filter(function(a){
       return typeof a !== 'undefined';
     });;
 $scope.date = new Date();
- $scope.datescope = $filter('date')(new Date(), 'short');
+$scope.year = $filter('date')(new Date(), 'yyyy');
+$scope.day = $filter('date')(new Date(), 'dd');
+$scope.month = $filter('date')(new Date(), 'MM');
+$scope.datescope=$scope.day+'/'+$scope.month+'/'+$scope.year;
 //$scope.total = 
 $scope.zoom = 112;
 $scope.string = "hola prueba generar";
@@ -690,7 +693,7 @@ $scope.qrGen = function(){
       socket.emit('refresh',$scope.datos.ventaID);
       //alert("Enviado "+$scope.datos.ventaID);
       socket.on('reprefresh',function(newid){
-       // alert("recibido "+newid.control);
+       //alert("recibido "+newid.control);
         if (newid.control==false) {
           $scope.trigger="Cancelado";
           dat={
@@ -737,7 +740,116 @@ $scope.qrGen = function(){
  
 })
 
-.controller('Resumen', function($scope,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout,userData) {
+.controller('Resumen', function($scope,$stateParams,$ionicHistory,$filter,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout,userData) {
+  var fecha=new Date();
+  var dias_semana = new Array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado");
+  var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre", "Diciembre");
+  //alert(new Date(fecha.getTime()));
+  $scope.ayer1=new Date(fecha.getTime() - 24*60*60*1000);
+  $scope.ayer2=new Date(fecha.getTime() - 48*60*60*1000);
+  $scope.manana1=new Date(fecha.getTime() + 24*60*60*1000);
+  $scope.manana2=new Date(fecha.getTime() + 48*60*60*1000);
+  /*
+  alert(dias_semana[$scope.ayer2.getDay()]);
+  alert(meses[$scope.ayer2.getMonth()].substring(0,3));
+  alert($scope.ayer2.getDate());
+  */
+  $scope.ayer1mod=$scope.ayer1.getDate()+meses[$scope.ayer1.getMonth()].substring(0,3);
+  $scope.ayer2mod=$scope.ayer2.getDate()+meses[$scope.ayer2.getMonth()].substring(0,3);
+
+  $scope.manana1mod=$scope.manana1.getDate()+meses[$scope.manana1.getMonth()].substring(0,3);
+  $scope.manana2mod=$scope.manana2.getDate()+meses[$scope.manana2.getMonth()].substring(0,3);
+
+  $scope.dia0=new Date(fecha.getTime());
+  $scope.dia1=new Date(fecha.getTime() - 24*60*60*1000);
+  $scope.dia2=new Date(fecha.getTime() - 48*60*60*1000);
+  $scope.dia3=new Date(fecha.getTime() - 72*60*60*1000);
+  $scope.dia4=new Date(fecha.getTime() - 96*60*60*1000);
+  $scope.dia5=new Date(fecha.getTime() - 120*60*60*1000);
+  $scope.dia6=new Date(fecha.getTime() - 144*60*60*1000);
+  $scope.formatfech=function(fec){
+    var year1 = $filter('date')(fec, 'yyyy');
+    var day1 = $filter('date')(fec, 'dd');
+    var month1 = $filter('date')(fec, 'MM');
+    var datemod1=day1+'/'+month1+'/'+year1;
+    return datemod1;
+  };
+  var fecmoddia0=$scope.formatfech($scope.dia0);
+  var fecmoddia1=$scope.formatfech($scope.dia1);
+  var fecmoddia2=$scope.formatfech($scope.dia2);
+  var fecmoddia3=$scope.formatfech($scope.dia3);
+  var fecmoddia4=$scope.formatfech($scope.dia4);
+  var fecmoddia5=$scope.formatfech($scope.dia5);
+  var fecmoddia6=$scope.formatfech($scope.dia6);
+
+  //alert($scope.formatfech($scope.dia0));
+  var datos=userData.datos.userId;
+  var fechas={datos,fecmoddia0,fecmoddia1,fecmoddia2,fecmoddia3,fecmoddia4,fecmoddia5,fecmoddia6};
+  //alert(fecha);
+  socket.emit('statventas',fechas);
+  socket.removeListener('repstatventas');
+  $scope.fecmonto0=0;
+  $scope.fecmonto1=0;
+  $scope.fecmonto2=0;
+  $scope.fecmonto3=0;
+  $scope.fecmonto4=0;
+  $scope.fecmonto5=0;
+  $scope.fecmonto6=0;
+  socket.on('repstatventas',function(montos){
+    //alert(montos);
+    $scope.fec=montos;
+    //alert($scope.dataVentas[0]);
+    if ($scope.fec[0]=='f') {
+      $scope.fec=[];
+      
+    }
+    else{
+      for(n in $scope.fec){
+        //alert($scope.fec[n].fecha);
+        if ($scope.fec[n].fecha==fecmoddia0) {
+          //alert('entro');
+          $scope.fecmonto0+=parseFloat($scope.fec[n].monto);
+        }else if($scope.fec[n].fecha==fecmoddia1){
+          $scope.fecmonto1+=parseFloat($scope.fec[n].monto);
+        }else if($scope.fec[n].fecha==fecmoddia2){
+          $scope.fecmonto2+=parseFloat($scope.fec[n].monto);
+        }else if($scope.fec[n].fecha==fecmoddia3){
+          $scope.fecmonto3+=parseFloat($scope.fec[n].monto);
+        }else if($scope.fec[n].fecha==fecmoddia4){
+          $scope.fecmonto4+=parseFloat($scope.fec[n].monto);
+        }else if($scope.fec[n].fecha==fecmoddia5){
+          $scope.fecmonto5+=parseFloat($scope.fec[n].monto);
+        }else{
+          $scope.fecmonto6+=parseFloat($scope.fec[n].monto);
+        }
+      }
+      //alert($scope.fecmonto0);
+      $scope.data = [
+        [$scope.fecmonto6,$scope.fecmonto5,$scope.fecmonto4,$scope.fecmonto3,$scope.fecmonto2, $scope.fecmonto1, $scope.fecmonto0]
+      ];
+    }
+    //alert(JSON.parse(ventas));
+  });
+  $scope.dia0mod=dias_semana[$scope.dia0.getDay()];
+  $scope.dia1mod=dias_semana[$scope.dia1.getDay()];
+  $scope.dia2mod=dias_semana[$scope.dia2.getDay()];
+  $scope.dia3mod=dias_semana[$scope.dia3.getDay()];
+  $scope.dia4mod=dias_semana[$scope.dia4.getDay()];
+  $scope.dia5mod=dias_semana[$scope.dia5.getDay()];
+  $scope.dia6mod=dias_semana[$scope.dia6.getDay()];
+
+  //alert(dias_semana[$scope.dia6.getDay()]+' - '+dias_semana[$scope.dia5.getDay()]+' - '+dias_semana[$scope.dia4.getDay()]+' - '+dias_semana[$scope.dia3.getDay()]+' - '+dias_semana[$scope.dia2.getDay()]+' - '+dias_semana[$scope.dia1.getDay()]+' - '+dias_semana[$scope.dia0.getDay()]);
+
+  $scope.width=document.getElementById("cont").offsetWidth-40;
+  //alert($scope.width);
+  $scope.height=document.getElementById("cont").offsetHeight;
+  if ($scope.width>320) {
+    $scope.fontchart=($scope.width*10)/320;
+  }
+  else{
+    $scope.fontchart=10;
+  }
+  
   $scope.ingresos=0;
   $scope.balance=0;
   $scope.ingresosItems=0;
@@ -785,11 +897,11 @@ $scope.qrGen = function(){
       //console.log($scope.ingresosOtros);
     }
   });
-  $scope.labels = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+  //alert($scope.fecmonto0);
+  $scope.labels = [$scope.dia6mod, $scope.dia5mod, $scope.dia4mod, $scope.dia3mod, $scope.dia2mod, $scope.dia1mod, $scope.dia0mod];
   $scope.series = ['serie A'];
-  $scope.data = [
-    [1650, 1590, 1810]
-  ];
+  
+  $scope.options={scaleFontSize: $scope.fontchart};
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };

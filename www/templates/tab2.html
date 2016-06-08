@@ -19,19 +19,19 @@
 	<a class="item hide" ng-class="{ 'fadein': counventas === 0 }">
 		<p class="tittext" style="color:rgba(0,0,0,0.5);">No se han realizado ventas... </p>
 	</a>
-	<a class="item " ng-repeat="venta in dataVentas | filter:search">
+	<a class="item hide" ng-class="{ 'fadein': counventas != 0 }"  ng-repeat="venta in dataVentas | filter:search">
 		<i class="icon icon-caja" align="center">
 			<img src="/img/caja.png" style="width:35px;">
 		</i>
-	<div style="float:left;">
-		<p class="tittext">Pagó: {{venta.pagUsu}}</p>
-		<p class="subtext">Bs. {{venta.monto}}</p>
-	</div>
-	<div style="margin-top:-5px;float:right;">
-		<p class="p-text">Fecha</p>
-		<p class="mp-text">{{venta.fecha}}</p>
-		<p class="mp-text">{{venta.status}}</p>
-	</div>
+		<div style="float:left;">
+			<p class="tittext">Pagó: {{venta.pagUsu}}</p>
+			<p class="subtext">Bs. {{venta.monto}}</p>
+		</div>
+		<div style="margin-top:-5px;float:right;">
+			<p class="p-text">Fecha</p>
+			<p class="mp-text">{{venta.fecha}}</p>
+			<p class="mp-text">{{venta.status}}</p>
+		</div>
 	</a>
 </div>
 </ion-content>

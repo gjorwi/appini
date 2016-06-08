@@ -82,13 +82,14 @@
   font-weight:300;color:white;
 }
 .graficss{
-  height:170px;
+  height:160px;
   display: hidden;
 }
 .graf{
   border:none!important;margin-top:50px;
 }
 .cash-resumen{
+  margin-top: 10px;
   color:white;
   padding:0px;
   background-color:rgba(0,0,0,0.06);
@@ -500,7 +501,7 @@ box-shadow: 0px 0px 6px rgba(20,20,20,1);
 .font-in-reg{
   font-size: 16px;
 }
-@media(max-width: 321px) {
+@media(max-width: 325px) {
   .top-marg-resum{
     margin-top:50px;
   }
@@ -527,7 +528,7 @@ box-shadow: 0px 0px 6px rgba(20,20,20,1);
     font-size: 18px!important;
   }
   .icon-login{
-    font-size:130px;
+    font-size:140px;
   }
   .grafic{
     padding-top:50px;
@@ -588,14 +589,57 @@ box-shadow: 0px 0px 6px rgba(20,20,20,1);
   .padd-ico{
     padding:20px 15px;
   }
+  .graf{
+   margin-top:50px;
+  }
+}
+
+.card-login-padd{
+  padding:0px;
+}
+.font-inp-login{
+  text-decoration: none;
 }
 @media(min-width: 700px) {
-  .grafic{
-    padding-top:50px;
-    height:305px;
+  .font-inp-login{
+    font-size: 25px!important;
+  }
+  .card-login-padd{
+    padding:30px;
+    padding-top:80px;
+  }
+  .top-marg-resum{
+    margin-top:50px;
+  }
+  .marg{
+    margin-top:0px;
+  }
+  .graficss{
+    height:300px;
+    display: hidden;
+  }
+  .padd-usu{
+    padding-top:30px;
+  }
+  .padd-pass{
+    padding-bottom:30px;
+  }
+  .font-in-reg{
+    padding:20px!important;
+    font-size: 30px;
+  }
+  .font-olv-cont{
+    font-size: 25px;
+  }
+  .font-pyme{
+    margin-top: -32px;
+    font-size: 50px!important;
+  }
+  .icon-login{
+    font-size:300px;
   }
   .cont-resumen{
-    margin-top: 450px;
+    margin-top: 500px;
   }
   .font-resum-12{
     font-size:30px;color:white;
@@ -655,9 +699,6 @@ box-shadow: 0px 0px 6px rgba(20,20,20,1);
     padding:40px 35px;
   }
   .graf{
-   margin-top:0px;
-  }
-  .grafic{
-    height:auto;
+   margin-top:60px;
   }
 }

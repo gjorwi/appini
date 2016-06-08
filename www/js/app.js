@@ -58,6 +58,16 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
   });
 })
 
+.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts 
+    ChartJsProvider.setOptions({
+      chartColors: ['#FF5252', '#FF8A80'],
+      responsive: false,
+      maintainAspectRatio: true,
+    });
+   
+  }])
+
 .config(function($stateProvider, $urlRouterProvider) {
  
   $stateProvider

@@ -12,30 +12,30 @@
         </div>
       </center>
     </div>
-    <div class="card" style="box-shadow: 0px 0px 0px white; background-color: rgba(255,255,255,0.0);">
-    <div class="item item-text-wrap" style="margin-top: 1%;">
-    <div class="list">
-      <label class="item item-input padd-usu">
-        <span class="input-label font-in-reg">Usuario</span>
-        <input type="text" ng-model="logdata.usu">
-      </label>
-      <label class="item item-input padd-pass">
-        <span class="input-label font-in-reg">Password</span>
-        <input type="password" ng-model="logdata.pass">
-      </label>
-    </div>
-    </div>
-    <div class="button-bar">
-      <button type="submit" class="button button-full base-positive-dark font-in-reg" ng-click="login()">
-       Ingresar
-      </button>
-      <button class="button button-full button-stable font-in-reg" ng-click="regis()">
-       Registrarse
-      </button>
-    </div>
-    <a class="button button-block button-clear button-light font-olv-cont" href="/#/app/menuprin">
-    Olvide mi contraseña
-    </a>
+    <div class="card card-login-padd" style="box-shadow: 0px 0px 0px white; background-color: rgba(255,255,255,0.0);">
+      <div class="item item-text-wrap" style="margin-top: 1%;">
+        <div class="list">
+          <label class="item item-input padd-usu">
+            <span class="input-label font-in-reg">Usuario</span>
+            <input type="text" class="font-inp-login" ng-model="logdata.usu">
+          </label>
+          <label class="item item-input padd-pass">
+            <span class="input-label font-in-reg">Password</span>
+            <input type="password" class="font-inp-login" ng-model="logdata.pass">
+          </label>
+        </div>
+      </div>
+      <div class="button-bar">
+        <button type="submit" class="button button-full base-positive-dark font-in-reg" ng-click="login()">
+         Ingresar
+        </button>
+        <button class="button button-full button-stable font-in-reg" ng-click="regis()">
+         Registrarse
+        </button>
+      </div>
+      <a class="button button-block button-clear button-light font-olv-cont" href="/#/app/menuprin">
+      Olvide mi contraseña
+      </a>
     </div>
 
    

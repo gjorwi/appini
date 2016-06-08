@@ -6,9 +6,9 @@
     </ion-nav-buttons>
   </ion-nav-bar>
   <div class="trans graf top-marg-resum">
-    <div class="graficss" align="center">
-      <canvas id="line" class="chart chart-line" chart-data="data"
-        chart-labels="labels" chart-legend="false" chart-series="false"
+    <div class="graficss" id="cont" align="center">
+      <canvas id="line" width="{{width}}" height="{{height}}" class="chart chart-line" chart-data="data"
+        chart-labels="labels" chart-legend="false" chart-options="options" chart-series="line"
         chart-click="onClick" >
       </canvas>
     </div>
@@ -29,20 +29,20 @@
   </div>
   <ion-content class="cont-resumen">
     <div class="row bar-resum-fec" align="center">
-      <div class="col bar-resumen">
-        <p class="font-fec">15sep</p>
+      <div class="col bar-resumen" ng-click="resumFec(manana2mod)">
+        <p class="font-fec">{{ayer2mod}}</p>
       </div>
-      <div class="col bar-resumen">
-        <p class="font-fec" >16sept</p>
+      <div class="col bar-resumen" ng-click="resumFec(manana2mod)">
+        <p class="font-fec" >{{ayer1mod}}</p>
       </div>
-      <div class="col bar-resumen">
+      <div class="col bar-resumen" ng-click="resumFec(manana2mod)">
         <p  class="font-rcl font-fec-hoy">HOY</p>
       </div>
-      <div class="col bar-resumen">
-        <p class="font-fec" >17sep</p>
+      <div class="col bar-resumen" ng-click="resumFec(manana2mod)">
+        <p class="font-fec" >{{manana1mod}}</p>
       </div>
-      <div class="col bar-resumen">
-        <p class="font-fec" >18sep</p>
+      <div class="col bar-resumen" ng-click="resumFec(manana2mod)">
+        <p class="font-fec" >{{manana2mod}}</p>
       </div>
     </div>
     <div class="row" style="border-bottom:1px solid rgba(0,0,0,0.1);padding:0px;">
