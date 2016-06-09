@@ -784,8 +784,9 @@ $scope.qrGen = function(){
 
   //alert($scope.formatfech($scope.dia0));
   var datos=userData.datos.userId;
-  var fechas={datos,fecmoddia0,fecmoddia1,fecmoddia2,fecmoddia3,fecmoddia4,fecmoddia5,fecmoddia6};
-  //alert(fecha);
+  var fechas=[];
+  fechas=[datos,fecmoddia0,fecmoddia1,fecmoddia2,fecmoddia3,fecmoddia4,fecmoddia5,fecmoddia6];
+  //alert(fechas[0]+' '+fechas[1]+' '+fechas[2]+' '+fechas[3]+' '+fechas[4]+' '+fechas[5]+' '+fechas[6]);
   socket.emit('statventas',fechas);
   socket.removeListener('repstatventas');
   $scope.fecmonto0=0;
