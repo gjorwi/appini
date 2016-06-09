@@ -1,4 +1,4 @@
-<ion-view view-title="{{pageInv}}" cache-view="false" style="background-color: rgba(0,0,0,0.05)">
+<ion-view view-title="Inventario" cache-view="false" style="background-color: rgba(0,0,0,0.05)">
   <ion-nav-bar class="color-base" align-title="left">
     <ion-nav-buttons side="left">
       <button class="button icon ion-android-menu button-clear color-base"  menu-toggle="left"> 
@@ -14,9 +14,11 @@
       <a class="tab-item active" ng-class="{ 'active': Swiper.activeIndex === 0 }" ng-click="slideTo(0)">
         Productos / Servicios
       </a>
+      <!--
       <a class="tab-item" ng-class="{ 'active': Swiper.activeIndex === 1 }" ng-click="slideTo(1)">
         Categorias
       </a>
+      -->
     </div>
   </div>
   <ion-content class="has-subheader">
@@ -25,10 +27,12 @@
         <div ng-include src="'templates/tabinv1.html'">
         </div>
       </ion-slide-page>
+      <!--
       <ion-slide-page>
         <div ng-include src="'templates/tabinv2.html'">
         </div>
       </ion-slide-page>
+      -->
     </ion-slides>
   </ion-content>
 

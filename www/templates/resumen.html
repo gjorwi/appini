@@ -6,24 +6,24 @@
     </ion-nav-buttons>
   </ion-nav-bar>
   <div class="trans graf top-marg-resum">
-    <div class="graficss" id="cont" align="center">
-      <canvas id="line" width="{{width}}" height="{{height}}" class="chart chart-line" chart-data="data"
-        chart-labels="labels" chart-legend="false" chart-options="options" chart-series="line"
-        chart-click="onClick" >
-      </canvas>
+    <div class="graficss" style="position:relative;"  id="cont" align="center">
+      <div style="position:absolute;z-index:30;width:100%;height:100%;; " ng-class="{ 'ma': log === 'true' }">
+        <ion-spinner icon="ripple" style=""></ion-spinner>
+      </div>
+      
     </div>
     <div class="row cash-resumen">
       <div class="col col-33 item-cash-resumen">
-        <h5 class="font-rcl font-resum-12">RETIROS</h5>
-        <h4 class="font-rcl font-monto">{{'0' | currency:'Bs '}}</h4>
+        <h5 class="font-rcl font-resum-12">INGRESOS</h5>
+        <h4 class="font-rcl font-monto">{{ingresos | currency:'Bs '}}</h4>
       </div>
       <div class="col col-33 item-cash-resumen">
         <h5 class="font-rcl font-resum-15">BALANCE</h5>
         <h4 class="font-rcl font-monto" >{{balance | currency:'Bs '}}</h4>
       </div>
       <div class="col col-33 item-cash-resumen">
-        <h5 class="font-rcl font-resum-12">INGRESOS</h5>
-        <h4 class="font-rcl font-monto">{{ingresos | currency:'Bs '}}</h4>
+        <h5 class="font-rcl font-resum-12">RETIROS</h5>
+        <h4 class="font-rcl font-monto">{{'0' | currency:'Bs '}}</h4>
       </div>
     </div>
   </div>

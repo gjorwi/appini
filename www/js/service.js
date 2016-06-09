@@ -57,7 +57,7 @@ angular.module('starter.service', [])
 })
 .factory('socket',function(socketFactory){
     //Create socket and connect to http://chat.socket.io 
-    var myIoSocket = io.connect('http://54.149.254.78:443');
+    var myIoSocket = io.connect('https://54.149.254.78:1443',{secure:true});
 
     mySocket = socketFactory({
         ioSocket: myIoSocket

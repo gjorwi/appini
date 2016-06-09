@@ -159,8 +159,19 @@ angular.module('starter.controllers', [])
 
 .controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,$ionicPopup,histcob,invent,ventas,pagoService) {
   
-
+  $scope.venLog='false';
   $scope.opcion=0;
+
+  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = ['Series A', 'Series B'];
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+
   $scope.switch = function(val){
     $scope.opcion=val;
   }
@@ -225,6 +236,7 @@ angular.module('starter.controllers', [])
     if ($scope.dataVentas[0]=='f') {
       $scope.dataVentas=[];
     }
+    $scope.venLog='true';
     $scope.counventas=$scope.dataVentas.length;
     //alert(JSON.parse(ventas));
   });
@@ -478,6 +490,8 @@ $scope.qrGen = function(){
   if (!userData.datos.userId) {
     $state.go('login');
   }
+  $scope.venLog='false';
+
   $scope.sql=function(){
     socket.emit('sqlprod',userData.datos.userId);
     socket.emit('sqlserv',userData.datos.userId);
@@ -563,6 +577,7 @@ $scope.qrGen = function(){
     if ($scope.dataVentas[0]=='f') {
       $scope.dataVentas=[];
     }
+    $scope.venLog='true';
     $scope.counprod=$scope.dataVentas.length;
   });
   socket.removeListener('repsqlserv');
@@ -781,7 +796,7 @@ $scope.qrGen = function(){
   var fecmoddia4=$scope.formatfech($scope.dia4);
   var fecmoddia5=$scope.formatfech($scope.dia5);
   var fecmoddia6=$scope.formatfech($scope.dia6);
-
+  $scope.log='false';
   //alert($scope.formatfech($scope.dia0));
   var datos=userData.datos.userId;
   var fechas=[];
@@ -824,6 +839,7 @@ $scope.qrGen = function(){
           $scope.fecmonto6+=parseFloat($scope.fec[n].monto);
         }
       }
+      $scope.log='true';
       //alert($scope.fecmonto0);
       $scope.data = [
         [$scope.fecmonto6,$scope.fecmonto5,$scope.fecmonto4,$scope.fecmonto3,$scope.fecmonto2, $scope.fecmonto1, $scope.fecmonto0]
@@ -899,6 +915,7 @@ $scope.qrGen = function(){
     }
   });
   //alert($scope.fecmonto0);
+  
   $scope.labels = [$scope.dia6mod, $scope.dia5mod, $scope.dia4mod, $scope.dia3mod, $scope.dia2mod, $scope.dia1mod, $scope.dia0mod];
   $scope.series = ['serie A'];
   
@@ -906,4 +923,5 @@ $scope.qrGen = function(){
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
+  
 })
