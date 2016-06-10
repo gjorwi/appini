@@ -8,6 +8,14 @@ angular.module('starter.service', [])
  		return this.pago;
  	}
 })
+.service('EnlaceService', function(){
+ this.datenl = {};
+
+ 	this.giveDat = function(){
+
+ 		return this.datenl;
+ 	}
+})
 .service('userData', function(){
  this.datos = {};
 

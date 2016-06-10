@@ -10,7 +10,10 @@
       <div style="position:absolute;z-index:30;width:100%;height:100%;; " ng-class="{ 'ma': log === 'true' }">
         <ion-spinner icon="ripple" style=""></ion-spinner>
       </div>
-      
+      <canvas id="line" class="chart chart-line" width="{{width}}" height="{{height}}" chart-data="data"
+        chart-labels="labels" chart-legend="false" chart-options="options" chart-series="series"
+        chart-click="onClick" >
+      </canvas> 
     </div>
     <div class="row cash-resumen">
       <div class="col col-33 item-cash-resumen">

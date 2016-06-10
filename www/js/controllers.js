@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope,$state, $ionicModal, $timeout,userData) {
+.controller('AppCtrl', function($scope,$state, $ionicModal, $timeout,userData,$ionicPopover) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -47,6 +47,38 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  $ionicPopover.fromTemplateUrl('popover.html', {
+      scope: $scope
+   }).then(function(popover) {
+      $scope.popover = popover;
+   });
+
+   $scope.openPopover = function($event) {
+      $scope.popover.show($event);
+   };
+
+   $scope.closePopover = function() {
+      $scope.popover.hide();
+   };
+
+   //Cleanup the popover when we're done with it!
+   $scope.$on('$destroy', function() {
+      $scope.popover.remove();
+   });
+
+   // Execute action on hide popover
+   $scope.$on('popover.hidden', function() {
+      // Execute action
+   });
+
+   // Execute action on remove popover
+   $scope.$on('popover.removed', function() {
+      // Execute action
+   });
+
+
+
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams,datos) {
@@ -924,4 +956,62 @@ $scope.qrGen = function(){
     console.log(points, evt);
   };
   
+})
+
+.controller('Cajas', function($scope,EnlaceService,$stateParams,$ionicHistory,$filter,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout,userData) {
+  $scope.Swiper=null;
+  $scope.index = 0;
+  $scope.pageInv = 'Cajas';
+  $scope.options = {
+    onSlideChangeEnd: function(swiper){
+      if(swiper.activeIndex == 0){
+        $scope.pageInv ='Productos';
+        socket.emit('sqlprod',userData.datos.userId);
+        socket.emit('sqlserv',userData.datos.userId);
+      }
+      if(swiper.activeIndex == 1)
+      $scope.pageInv ='Categorias';  
+      $scope.$apply();
+     },
+     onInit:function(swiper){
+        $scope.declareSwiper(swiper);
+        $scope.$digest();
+     },
+     pagination: false
+    }
+    $scope.declareSwiper = function(swiper){
+      $scope.Swiper = swiper;
+    }
+    $scope.slideTo = function(slide){
+      $scope.Swiper.slideTo(slide, 200, true);
+    }
+  $scope.qrGenEnl = function(){
+    $scope.year = $filter('date')(new Date(), 'yyyy');
+    $scope.day = $filter('date')(new Date(), 'dd');
+    $scope.month = $filter('date')(new Date(), 'MM');
+    $scope.datescope=$scope.day+'/'+$scope.month+'/'+$scope.year;
+
+    $scope.GenEnl = {id:userData.datos.userId, fecha:$scope.datescope};
+
+    //socket.emit('Genlace', $scope.totalPagoGen);
+    //socket.on('enlaceRegistrado', function(enlreg){
+    //EnlaceService.datenl=enlreg;
+    $state.go('app.enlGen');
+    //});
+  }
+})
+.controller('ScanEnlace', function($scope,EnlaceService,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
+  
+  //$scope.datenl=EnlaceService.giveDat();
+  //alert($scope.datos.ventaID);
+  //$scope.datenl.enlID=$scope.datenl.enlID.toString();
+  //alert($scope.datos.ventaID);
+  $scope.datenl='123456789';
+  /*
+  socket.removeListener('serverConfirm');
+  socket.on('serverConfirm', function(){
+    alert("pago confirmado por el servidor");
+    $ionicHistory.goBack(-1);
+  });
+ */
 })

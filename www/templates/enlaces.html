@@ -1,0 +1,53 @@
+
+  <div style="padding:15px!important;">
+    <div class="card" style="padding:0px!important;margin:0px!important;margin-top:5px!important;border-left:6px solid #DD2651;">
+      <div class="row" style="padding:0px!important;">
+        <div class="font-rc" align="center" style="font-size:16px;padding:0px!important;padding-top:5px!important;border-right:1px solid rgba(0,0,0,0.4);width:70%;">
+          <div>
+            <ion-icon class="light">
+              <span class="ion-android-share-alt color-base" style="font-size:40px;"></span>
+            </ion-icon>
+
+          </div>
+          Generar QR
+        </div>
+        <div class="item item-text-wrap font-rcl col" ng-click="qrGenEnl()" style="font-weight:bold;padding:15px;background-color:rgba(0,0,0,0.06);border:none!important;">
+            <i class="icon ion-chevron-right" style="font-size:40px;margin-left:15px;"></i>
+        </div>
+        </div>
+    </div>
+  </div>
+  <div style="padding:15px!important;padding-top:0px!important;">
+    <div class="card" style="margin:0px!important;margin-top:5px!important;border-left:6px solid #DD2651;">
+      <div class="row" style="padding:0px!important;">
+        <div class="font-rc" align="center" style="font-size:16px;padding:0px!important;padding-top:5px!important;border-right:1px solid rgba(0,0,0,0.4);width:70%;">
+          <div>
+            <ion-icon class="light">
+              <span class="payqr-scan color-base" style="font-size:40px;"></span>
+            </ion-icon>
+
+          </div>
+          Capturar QR
+        </div>
+        <div class="item item-text-wrap font-rcl col" style="font-weight:bold;padding:15px;background-color:rgba(0,0,0,0.06);border:none!important;">
+            <i class="icon ion-chevron-right" style="font-size:40px;margin-left:15px;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-content style="background-color:#fff;margin-top:200px;height:auto!important;">
+    <div align="center" style="border-bottom:1px solid #DD2651;padding:10px;background-color:white;">
+      ENLAZADOS
+    </div>
+    <div class="list list-inset" style="margin-top:5px;">
+      <a class="item " ng-class="{ 'fadein': counthist === 0 }">
+              <p class="tittext" style="color:rgba(0,0,0,0.6);">Nada que mostrar.</p>
+      </a>
+      <div class="item item-button-right hide" style="font-weight:bold;color:#4684EF;padding:15px!important;">
+      Caja 1 <span style="padding-left:10px;border-left:1px solid rgba(0,0,0,0.3);margin-left:5px;font-size:14px;color:#666;font-weight:400;">dazhurgen</span>
+        <button class="button button-assertive" style="margin:0px!important;" ng-click="deletCob(historial)">
+          <i class="icon ion-close-round"></i>
+        </button>
+      </div>
+    </div>
+  </ion-content>
