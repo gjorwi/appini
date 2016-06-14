@@ -1,0 +1,23 @@
+<div class="list">
+  <label class="item item-input">
+    <span class="input-label " ng-class="{ 'assertive':choice.name===''}">Usuario</span>
+    <input type="text" ng-model="choice.userId">
+  </label>
+  <label class="item item-input" ng-click="tiprif()">
+    <span class="input-label " ng-class="{ 'assertive':choice.tiprif===''}">Tipo RIF (Enlace)</span>
+    <div ng-click="tiprif()" style="width:100%;background-color:;">{{choice.tiprif}}</div>
+    <input type="hidden"  ng-model="choice.tiprif">
+  </label>
+  <label class="item item-input">
+    <span class="input-label " ng-class="{ 'assertive':choice.rif===''}">RIF (Enlace)</span>
+    <input type="tel" required ng-model="choice.rif">
+  </label>
+   <label class="item item-input">
+    <span class="input-label" ng-class="{ 'assertive':choice.password===''}">Contraseña</span>
+    <input type="number" ng-model="choice.password">
+  </label>
+  <label class="item item-input">
+    <span class="input-label" ng-class="{ 'assertive':choice.confirmPass===''}">Confirmar contraseña</span>
+    <input type="number" id="confirmPassword" ng-model="choice.confirmPass">
+  </label>
+</div>

@@ -86,8 +86,115 @@ angular.module('starter.controllers', [])
 })
 
 .controller('Login', function($scope,$state,$ionicModal,socket,$ionicHistory, $ionicPopup,userData) {
+  $scope.Swiper=null;
+  $scope.index = 0;
+  $scope.regEnl = 'Registrar';
+  $scope.options = {
+           onSlideChangeEnd: function(swiper){
+            if(swiper.activeIndex == 0)
+            $scope.regEnl = 'Registrar';
+            if(swiper.activeIndex == 1){
+              $scope.regEnl = 'Enlazar';
+            } 
+            $scope.$apply();
+           },
+           onInit:function(swiper){
+              $scope.declareSwiper(swiper);
+              $scope.$digest();
+           },
+           pagination: false
 
+      }
+    $scope.declareSwiper = function(swiper){
+      $scope.Swiper = swiper;
+    }
+    $scope.slideTo = function(slide){
+    $scope.Swiper.slideTo(slide, 200, true);
+  }
   $scope.choice={};
+  $scope.funcreg = function(dato) {
+    if (dato=="Registrar") {
+      //alert(dato);
+      //alert('id:'+$scope.choice.email);
+      if(!$scope.choice.userId ||!$scope.choice.name|| !$scope.choice.tiprif||!$scope.choice.rif||!$scope.choice.email
+        ||!$scope.choice.direccion || !$scope.choice.tel ||!$scope.choice.password ||!$scope.choice.confirmPass ){
+        $scope.alertMessage = 'Faltan campos por llenar';
+        $scope.showAlert();
+      }
+      else if($scope.choice.email==undefined){
+          $scope.alertMessage = 'El correo ingresado es invalido';
+          $scope.showAlert();
+          $scope.choice.password ='';
+          $scope.choice.confirmPass='';
+      }
+      else if($scope.choice.password!=$scope.choice.confirmPass){
+          $scope.alertMessage = 'Las contraseñas no coinciden';
+          $scope.showAlert();
+          $scope.choice.password ='';
+          $scope.choice.confirmPass='';
+      }
+      else if($scope.choice.password.length<=6){
+          $scope.alertMessage = 'Las contraseñas debe contener al menos 6 caracteres.';
+          $scope.showAlert();
+          $scope.choice.password ='';
+          $scope.choice.confirmPass='';
+      }
+      else{
+        $scope.choice.registration=userData.datos.pushReg;
+        socket.emit('registerEmp',$scope.choice);
+        
+      }
+      socket.removeListener('cantRegis');
+      socket.on('cantRegis',function(){
+        $scope.alertMessage = 'La empresa ya se encuentra registrada!';
+        $scope.showAlert();
+      });
+      socket.removeListener('regOk');
+      socket.on('regOk',function(){
+        $scope.alertMessage = 'Sus datos fueron registrados Exitosamente!';
+        $scope.showAlert();
+        $ionicHistory.goBack(-1);
+      });
+    }else{
+      //alert(dato);
+      //alert('id:'+$scope.choice.email);
+      if(!$scope.choice.userId || !$scope.choice.tiprif||!$scope.choice.rif||!$scope.choice.password ||!$scope.choice.confirmPass ){
+        $scope.alertMessage = 'Faltan campos por llenar';
+        $scope.showAlert();
+      }
+      else if($scope.choice.password!=$scope.choice.confirmPass){
+          $scope.alertMessage = 'Las contraseñas no coinciden';
+          $scope.showAlert();
+          $scope.choice.password ='';
+          $scope.choice.confirmPass='';
+      }
+      else if($scope.choice.password.length<=6){
+          $scope.alertMessage = 'Las contraseñas debe contener al menos 6 caracteres.';
+          $scope.showAlert();
+          $scope.choice.password ='';
+          $scope.choice.confirmPass='';
+      }
+      else{
+        $scope.choice.registration=userData.datos.pushReg;
+        socket.emit('enlEmp',$scope.choice);
+        
+      }
+      socket.removeListener('cantEnl');
+      socket.on('cantEnl',function(){
+        $scope.alertMessage = 'La empresa a la que intenta enlazar no se encuentra registrada!';
+        $scope.showAlert();
+      });
+      socket.removeListener('enlOk');
+      socket.on('enlOk',function(){
+        $scope.alertMessage = 'Enlace Exitoso!';
+        $scope.showAlert();
+        $ionicHistory.goBack(-1);
+      });
+    
+    };
+  };
+
+  
   $scope.valinput='';
   //alert("login");
   $ionicModal.fromTemplateUrl('templates/tiporif.html', {
@@ -144,46 +251,6 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   }
   $scope.register = function(){
-    //alert('id:'+$scope.choice.email);
-    if(!$scope.choice.userId ||!$scope.choice.name|| !$scope.choice.tiprif||!$scope.choice.rif||!$scope.choice.email
-      ||!$scope.choice.direccion || !$scope.choice.tel ||!$scope.choice.password ||!$scope.choice.confirmPass ){
-      $scope.alertMessage = 'Faltan campos por llenar';
-      $scope.showAlert();
-    }
-    else if($scope.choice.email==undefined){
-        $scope.alertMessage = 'El correo ingresado es invalido';
-        $scope.showAlert();
-        $scope.choice.password ='';
-        $scope.choice.confirmPass='';
-    }
-    else if($scope.choice.password!=$scope.choice.confirmPass){
-        $scope.alertMessage = 'Las contraseñas no coinciden';
-        $scope.showAlert();
-        $scope.choice.password ='';
-        $scope.choice.confirmPass='';
-    }
-    else if($scope.choice.password.length<=6){
-        $scope.alertMessage = 'Las contraseñas debe contener al menos 6 caracteres.';
-        $scope.showAlert();
-        $scope.choice.password ='';
-        $scope.choice.confirmPass='';
-    }
-    else{
-      $scope.choice.registration=userData.datos.pushReg;
-      socket.emit('registerEmp',$scope.choice);
-      
-    }
-    socket.removeListener('cantRegis');
-    socket.on('cantRegis',function(){
-      $scope.alertMessage = 'La empresa ya se encuentra registrada!';
-      $scope.showAlert();
-    });
-    socket.removeListener('regOk');
-    socket.on('regOk',function(){
-      $scope.alertMessage = 'Sus datos fueron registrados Exitosamente!';
-      $scope.showAlert();
-      $ionicHistory.goBack(-1);
-    });
     
   }
 
@@ -193,16 +260,6 @@ angular.module('starter.controllers', [])
   
   $scope.venLog='false';
   $scope.opcion=0;
-
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
 
   $scope.switch = function(val){
     $scope.opcion=val;
@@ -910,6 +967,8 @@ $scope.qrGen = function(){
     //alert("hola");
     $scope.balance=bal;
   });
+  $scope.datingre=userData.datos;
+  $scope.datingre.fechaact=$scope.formatfech(fecha);
   socket.emit('ingresos',userData.datos);
   socket.removeListener('repingresos');
   socket.on('repingresos',function(ing){
@@ -962,15 +1021,15 @@ $scope.qrGen = function(){
   $scope.Swiper=null;
   $scope.index = 0;
   $scope.pageInv = 'Cajas';
+  socket.emit('sqlsolenl',userData.datos.userId);
   $scope.options = {
     onSlideChangeEnd: function(swiper){
       if(swiper.activeIndex == 0){
-        $scope.pageInv ='Productos';
-        socket.emit('sqlprod',userData.datos.userId);
-        socket.emit('sqlserv',userData.datos.userId);
+        $scope.pageInv ='Solicitudes';
+        socket.emit('sqlsolenl',userData.datos.userId);
       }
       if(swiper.activeIndex == 1)
-      $scope.pageInv ='Categorias';  
+      $scope.pageInv ='Enlazados';  
       $scope.$apply();
      },
      onInit:function(swiper){
@@ -978,27 +1037,31 @@ $scope.qrGen = function(){
         $scope.$digest();
      },
      pagination: false
-    }
-    $scope.declareSwiper = function(swiper){
-      $scope.Swiper = swiper;
-    }
-    $scope.slideTo = function(slide){
-      $scope.Swiper.slideTo(slide, 200, true);
-    }
-  $scope.qrGenEnl = function(){
-    $scope.year = $filter('date')(new Date(), 'yyyy');
-    $scope.day = $filter('date')(new Date(), 'dd');
-    $scope.month = $filter('date')(new Date(), 'MM');
-    $scope.datescope=$scope.day+'/'+$scope.month+'/'+$scope.year;
-
-    $scope.GenEnl = {id:userData.datos.userId, fecha:$scope.datescope};
-
-    //socket.emit('Genlace', $scope.totalPagoGen);
-    //socket.on('enlaceRegistrado', function(enlreg){
-    //EnlaceService.datenl=enlreg;
-    $state.go('app.enlGen');
-    //});
   }
+  $scope.declareSwiper = function(swiper){
+    $scope.Swiper = swiper;
+  }
+  $scope.slideTo = function(slide){
+    $scope.Swiper.slideTo(slide, 200, true);
+  }
+  socket.removeListener('repsqlsolenl');
+  socket.on('repsqlsolenl',function(enl){
+    //alert(enl);
+    $scope.dataEnlaces=enl;
+    if ($scope.dataEnlaces[0]=='f') {
+      $scope.dataEnlaces=[];
+    }
+    $scope.countenl=$scope.dataEnlaces.length;
+  });
+  $scope.enlazar = function(caja){
+    alert(caja);
+    socket.emit('enlazar',caja);
+  }
+  socket.removeListener('respenlazar');
+  socket.on('respenlazar',function(dat){
+    alert('Caja Enlazada '+dat);
+  });
+  
 })
 .controller('ScanEnlace', function($scope,EnlaceService,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
   

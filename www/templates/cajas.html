@@ -1,22 +1,33 @@
-<ion-view view-title="Cajas" cache-view="false" style="background-color: rgba(0,0,0,0.1)">
+<ion-view view-title="Cajas" cache-view="false" >
   <ion-nav-bar class="color-base" align-title="left">
     <ion-nav-buttons side="left">
-      <button class="button icon ion-android-menu button-clear color-base" menu-toggle="left"> 
+      <button class="button icon ion-android-menu button-clear color-base"  menu-toggle="left"> 
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right" >
+      <button class="button icon ion-android-search button-clear" ng-class="{ 'hide': check.val == true }" style="color:white;" ng-click="openModal()"> 
       </button>
     </ion-nav-buttons>
   </ion-nav-bar>
-  <div class="tabs-striped tabs-top base-positive tabs-color-light">
+    <div class="tabs-striped tabs-top base-positive tabs-color-light">
     <div class="tabs base-positive">
       <a class="tab-item active" ng-class="{ 'active': Swiper.activeIndex === 0 }" ng-click="slideTo(0)">
-        Enlaces
+        Solicitudes
+      </a>
+      <a class="tab-item" ng-class="{ 'active': Swiper.activeIndex === 1 }" ng-click="slideTo(1)">
+        Enlazados
       </a>
     </div>
   </div>
   <ion-content class="has-subheader">
     <ion-slides slider="slider" options="options">
       <ion-slide-page>
-        <div ng-include src="'templates/enlaces.html'" ng-click="setear()">
+        <div ng-include src="'templates/solicitudes.html'">
         </div>
+      </ion-slide-page>
+      <ion-slide-page>
+          <div ng-include src="'templates/enlaces.html'">
+          </div>
       </ion-slide-page>
     </ion-slides>
   </ion-content>

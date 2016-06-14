@@ -165,15 +165,6 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
         }
       }
     })
-    .state('app.enlGen', {
-      url: '/cajas/qr',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/enlgen.html',
-          controller: 'ScanEnlace'
-        }
-      }
-    })
     .state('app.resumen', {
       url: '/resumen',
       views: {
