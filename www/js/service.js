@@ -16,6 +16,14 @@ angular.module('starter.service', [])
  		return this.datenl;
  	}
 })
+.service('Cajas', function(){
+ this.enlazado = {idmaster:0};
+
+ 	this.giveEnlazado = function(){
+
+ 		return this.enlazado;
+ 	}
+})
 .service('userData', function(){
  this.datos = {};
 

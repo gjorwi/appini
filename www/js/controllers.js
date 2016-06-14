@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope,$state, $ionicModal, $timeout,userData,$ionicPopover) {
+.controller('AppCtrl', function($scope,Cajas,$state, $ionicModal, $timeout,userData,$ionicPopover) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,6 +10,9 @@ angular.module('starter.controllers', [])
   //});
   //alert("menu");
   // Form data for the login modal
+  $scope.caja=Cajas.giveEnlazado();
+  $scope.caja=$scope.caja.idmaster;
+  //alert($scope.caja);
   $scope.menuser = userData.datos.userId;
   $scope.loginData = {};
   $scope.cancelar = function() {
@@ -85,7 +88,11 @@ angular.module('starter.controllers', [])
   $scope.detalle=datos.cancion();
 })
 
-.controller('Login', function($scope,$state,$ionicModal,socket,$ionicHistory, $ionicPopup,userData) {
+.controller('Login', function($scope,$state,$ionicModal,socket,$ionicHistory, $ionicPopup,userData,Cajas) {
+
+  $scope.caja=Cajas.giveEnlazado();
+  $scope.caja=$scope.caja.idmaster;
+  //alert($scope.caja);
   $scope.Swiper=null;
   $scope.index = 0;
   $scope.regEnl = 'Registrar';
@@ -186,7 +193,7 @@ angular.module('starter.controllers', [])
       });
       socket.removeListener('enlOk');
       socket.on('enlOk',function(){
-        $scope.alertMessage = 'Enlace Exitoso!';
+        $scope.alertMessage = 'Solicitud de enlace enviada con exito!';
         $scope.showAlert();
         $ionicHistory.goBack(-1);
       });
@@ -221,6 +228,7 @@ angular.module('starter.controllers', [])
   };
   $scope.logdata={};
   $scope.login = function(){
+    Cajas.enlazado.idmaster=0;
     if(!$scope.logdata.usu || !$scope.logdata.pass){
       $scope.alertMessage = 'Usuario o contraseña se encuentra en blanco!';
       $scope.showAlert();
@@ -238,6 +246,10 @@ angular.module('starter.controllers', [])
       }
       else if(desition.message=='true'){
         userData.datos = desition;
+        //alert(userData.datos);
+        if (userData.datos.idmaster) {
+          Cajas.enlazado.idmaster=userData.datos.idmaster;
+        }
         //alert(userData.datos.userId);
         $state.go('app.menuprin');
       }
@@ -256,7 +268,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('Princtrl', function($scope,$stateParams,$state,$filter,socket,userData,$ionicPopup,histcob,invent,ventas,pagoService) {
+.controller('Princtrl', function($scope,Cajas,$stateParams,$state,$filter,socket,userData,$ionicPopup,histcob,invent,ventas,pagoService) {
   
   $scope.venLog='false';
   $scope.opcion=0;
@@ -274,7 +286,12 @@ angular.module('starter.controllers', [])
   $scope.ir = function(){
      $state.go('app.reginv');
   }
-  socket.emit('sqlprod',userData.datos.userId);
+  var datsqlprod={userId:userData.datos.userId};
+  var idmaster=Cajas.giveEnlazado();
+  var id=idmaster.idmaster;
+  datsqlprod.idmaster=id;
+
+  socket.emit('sqlprod',datsqlprod);
   socket.removeListener('repsqlprod');
   socket.on('repsqlprod',function(prod){
     
@@ -295,7 +312,11 @@ angular.module('starter.controllers', [])
             $scope.page ='Cobros';
             if(swiper.activeIndex == 1){
               $scope.page ='Ventas';
-              socket.emit('sqlventas',userData.datos.userId);
+              var datsqlprod={userId:userData.datos.userId};
+              var idmaster=Cajas.giveEnlazado();
+              var id=idmaster.idmaster;
+              datsqlprod.idmaster=id;
+              socket.emit('sqlventas',datsqlprod);
             }
             if(swiper.activeIndex == 2){
             $scope.page ='Estadisticas';
@@ -560,32 +581,41 @@ $scope.comapunto = function(){
 $scope.qrGen = function(){
   $scope.histPagoGen=$scope.histPago.filter(function(a){
       return typeof a !== 'undefined';
-    });
+  });
   //alert($scope.histPagoGen);
+  var idmaster=Cajas.giveEnlazado();
+  var id=idmaster.idmaster;
   
-  $scope.totalPagoGen = {id:userData.datos.userId, monto:$scope.totalPago, fecha:$scope.datescope,histpag:angular.toJson($scope.histPagoGen)};
+    //alert(JSON.stringify(idmaster) );
+    //var id=Cajas.enlazados.idmaster;
+  $scope.totalPagoGen = {id:userData.datos.userId,idmaster:id, monto:$scope.totalPago, fecha:$scope.datescope,histpag:angular.toJson($scope.histPagoGen)};
   socket.emit('genVenta', $scope.totalPagoGen);
   socket.on('ventaRegistrado', function(pagreg){
     pagoService.pago=pagreg;
     $scope.reset();
     $state.go('app.qrGen');
   });
+  
 }
 
 ///////////////////////////////////////GENERAR COBRO///////////////////////////////////////
 })
 
-.controller('Invent', function($timeout,$scope,$stateParams,$state,$filter,$ionicModal,userData,socket,invent,detalle) {
+.controller('Invent', function($timeout,Cajas,$scope,$stateParams,$state,$filter,$ionicModal,userData,socket,invent,detalle) {
   if (!userData.datos.userId) {
     $state.go('login');
   }
   $scope.venLog='false';
+  var datsqlprod={userId:userData.datos.userId};
+  var idmaster=Cajas.giveEnlazado();
+  var id=idmaster.idmaster;
+  datsqlprod.idmaster=id;
 
-  $scope.sql=function(){
-    socket.emit('sqlprod',userData.datos.userId);
+  $scope.sql=function(datos){
+    socket.emit('sqlprod',datos);
     socket.emit('sqlserv',userData.datos.userId);
   };
-  $scope.sql();
+  $scope.sql(datsqlprod);
   
   $scope.check={
     val:'false',
@@ -639,7 +669,11 @@ $scope.qrGen = function(){
     onSlideChangeEnd: function(swiper){
       if(swiper.activeIndex == 0){
         $scope.pageInv ='Productos';
-        socket.emit('sqlprod',userData.datos.userId);
+        var datsqlprod={userId:userData.datos.userId};
+        var idmaster=Cajas.giveEnlazado();
+        var id=idmaster.idmaster;
+        datsqlprod.idmaster=id;
+        socket.emit('sqlprod',datsqlprod);
         socket.emit('sqlserv',userData.datos.userId);
       }
       if(swiper.activeIndex == 1)
@@ -726,7 +760,7 @@ $scope.qrGen = function(){
   });
 
 })
-.controller('Regpro', function($scope,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,socket,userData) {
+.controller('Regpro', function($scope,Cajas,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,socket,userData) {
   if (!userData.datos.userId) {
     $state.go('login');
   }
@@ -747,7 +781,10 @@ $scope.qrGen = function(){
    };
   $scope.regProd = function(){
     //alert('existencia:'+$scope.regprod.precio);
+
     $scope.regprod.userId=userData.datos.userId;
+    var idmaster=Cajas.giveEnlazado();
+    $scope.regprod.idmaster=idmaster.idmaster;
     if(!$scope.regprod.nombre|| !$scope.regprod.precio||!$scope.regprod.existencia
       ||!$scope.regprod.detalle){
       $scope.alertMessage = 'Faltan campos por llenar.';
@@ -782,8 +819,16 @@ $scope.qrGen = function(){
 
 })
 
-.controller('Scanpag', function($scope,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
-  
+.controller('Scanpag', function($scope,$stateParams,$ionicPopup,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
+  $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Alerta',
+       template: $scope.alertMessage
+     });
+
+     alertPopup.then(function(res) {
+     });
+   };
   $scope.datos=pagoService.givePago();
   //alert($scope.datos.ventaID);
   $scope.datos.ventaID=$scope.datos.ventaID.toString();
@@ -835,12 +880,10 @@ $scope.qrGen = function(){
 
   socket.removeListener('serverConfirm');
   socket.on('serverConfirm', function(){
-
-    
-    alert("pago confirmado por el servidor");
+    $scope.alertMessage = 'Cobro realizado de manera Exitosa!';
+      $scope.showAlert();
     $ionicHistory.goBack(-1);
-
-});
+  });
  
 })
 
@@ -1017,8 +1060,11 @@ $scope.qrGen = function(){
   
 })
 
-.controller('Cajas', function($scope,EnlaceService,$stateParams,$ionicHistory,$filter,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout,userData) {
+.controller('Cajas', function($scope,$ionicPopup,EnlaceService,$stateParams,$ionicHistory,$filter,socket,$state,pagoService,$timeout,userData) {
   $scope.Swiper=null;
+  $scope.sollog='false';
+  $scope.enllog='false';
+  $scope.dataEnlaces='';
   $scope.index = 0;
   $scope.pageInv = 'Cajas';
   socket.emit('sqlsolenl',userData.datos.userId);
@@ -1028,8 +1074,10 @@ $scope.qrGen = function(){
         $scope.pageInv ='Solicitudes';
         socket.emit('sqlsolenl',userData.datos.userId);
       }
-      if(swiper.activeIndex == 1)
-      $scope.pageInv ='Enlazados';  
+      if(swiper.activeIndex == 1){
+        $scope.pageInv ='Enlazados'; 
+        socket.emit('sqlenlazados',userData.datos.userId);
+      } 
       $scope.$apply();
      },
      onInit:function(swiper){
@@ -1045,23 +1093,88 @@ $scope.qrGen = function(){
     $scope.Swiper.slideTo(slide, 200, true);
   }
   socket.removeListener('repsqlsolenl');
-  socket.on('repsqlsolenl',function(enl){
+  socket.on('repsqlsolenl',function(solenl){
     //alert(enl);
-    $scope.dataEnlaces=enl;
+    $scope.dataEnlaces=solenl;
     if ($scope.dataEnlaces[0]=='f') {
       $scope.dataEnlaces=[];
     }
+    $scope.sollog='true';
     $scope.countenl=$scope.dataEnlaces.length;
   });
+  socket.removeListener('repsqlenlazados');
+  socket.on('repsqlenlazados',function(enlazados){
+    //alert(enl);
+    $scope.dataEnlazados=enlazados;
+    if ($scope.dataEnlazados[0]=='f') {
+      $scope.dataEnlazados=[];
+    }
+    $scope.enllog='true';
+    $scope.countenlazados=$scope.dataEnlazados.length;
+  });
+  $scope.showAlert = function() {
+    var alertPopup = $ionicPopup.alert({
+     title: 'Alerta',
+     template: $scope.alertMessage
+    });
+
+    alertPopup.then(function(res) {
+     
+    });
+  };
+ 
   $scope.enlazar = function(caja){
-    alert(caja);
-    socket.emit('enlazar',caja);
+    //alert(caja.userId);
+    var datenl={userId:caja.userId,tiprif:caja.tiprif,rif:caja.rif,password:caja.password,idmaster:caja.idmaster};
+    //alert(datenl);
+    socket.emit('enlazar',datenl);
   }
+  socket.removeListener('respenlazarerr');
+  socket.on('respenlazarerr',function(err){
+    $scope.alertMessage = 'La caja ya se encuentra enlazada!';
+    $scope.showAlert();
+  });
   socket.removeListener('respenlazar');
   socket.on('respenlazar',function(dat){
-    alert('Caja Enlazada '+dat);
+    socket.emit('sqlsolenl',userData.datos.userId);
+    $scope.alertMessage = 'Enlace exitoso!';
+    $scope.showAlert();
   });
-  
+  $scope.deletEnl= function(caja){
+
+    $scope.showConfirm = function() {
+       var confirmPopup = $ionicPopup.confirm({
+         title: 'Alerta',
+         template: 'Esta seguro de Desenlazar '+caja.userId+'?',
+         buttons: [
+          { text: 'No' },
+          {
+            text: '<b>Si</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              
+                return true;
+              
+            }
+          }
+        ]
+       });
+
+       confirmPopup.then(function(res) {
+         if(res) {
+           //alert('hola');
+           socket.emit('desenlazar',caja);
+         } else {
+           console.log('You are not sure');
+         }
+       });
+     };
+     $scope.showConfirm();
+  };
+  socket.removeListener('repdesenlazar');
+  socket.on('repdesenlazar',function(desenlazar){
+    socket.emit('sqlenlazados',userData.datos.userId);
+  });
 })
 .controller('ScanEnlace', function($scope,EnlaceService,$stateParams,$ionicHistory,socket,$state,$cordovaBarcodeScanner,pagoService,$timeout) {
   
