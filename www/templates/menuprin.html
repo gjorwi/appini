@@ -4,6 +4,12 @@
       <button class="button icon ion-android-menu button-clear color-base" menu-toggle="left"> 
       </button>
     </ion-nav-buttons>
+    <ion-nav-buttons side="right" >
+      <button class="button icon ion-android-calendar button-clear color-base" ng-class="{ 'ma': Swiper.activeIndex < 2 }" ng-click="calendar()" > 
+      </button>
+      <button class="button icon ion-clipboard button-clear color-base mi" ng-class="{ 'fadein': Swiper.activeIndex === 1 && caja.idmaster === 0 }" ng-click="anuladas()" > 
+      </button>
+    </ion-nav-buttons>
   </ion-nav-bar>
   <div class="tabs-striped tabs-top base-positive tabs-color-light">
     <div class="tabs base-positive">
@@ -20,7 +26,7 @@
   </div>
   <ion-content class="has-subheader">
     <ion-slides slider="slider" options="options">
-      <ion-slide-page>
+      <ion-slide-page >
         <div ng-include src="'templates/tab1.html'" ng-click="setear()">
         </div>
       </ion-slide-page>

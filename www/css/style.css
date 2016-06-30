@@ -127,12 +127,26 @@
   color:rgba(0,0,0,0.7);
   background-color: #FFD751;
 }
+.wth{
+  width:10%!important;
+}
+
 .base-positive{
   background-color: #DD2651!important;
   color:white!important;
 }
+.border-b{
+  border-bottom:1px solid #DD2651!important;
+}
+.grey{
+  background-color: rgba(0,0,0,0.2)!important;
+  color:white;
+}
 .color-base{
   color:#E9486D!important;
+}
+.subtot{
+  padding-top:0px!important;padding-bottom:5px!important;
 }
 .top-marg-resum{
   margin-top:80px;

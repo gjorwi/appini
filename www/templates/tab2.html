@@ -23,7 +23,7 @@
 	<a class="item hide" ng-class="{ 'fadein': counventas === 0 }">
 		<p class="tittext" style="color:rgba(0,0,0,0.5);">No se han realizado ventas... </p>
 	</a>
-	<a class="item hide" ng-class="{ 'fadein': venLog === 'true' }"  ng-repeat="venta in dataVentas | filter:search">
+	<a class="item hide" ng-class="{ 'fadein': venLog === 'true' }" ng-click="detventa(venta)" ng-repeat="venta in dataVentas | filter:search">
 		<i class="icon icon-caja" align="center">
 			<i class="icon ion-cash color-base" style="font-size:30px;"></i>
 		</i>

@@ -1,0 +1,52 @@
+<ion-view view-title="Detalle anulacion" style="background-color:rgba(0,0,0,0.05);">
+	<ion-nav-bar class="color-base border-b" align-title="left">
+      <ion-nav-back-button class="color-base">
+      </ion-nav-back-button>  
+  	</ion-nav-bar>
+  	<ion-content >
+  		<div class="list" style="margin-bottom:0px;">
+		  <div class="row base-positive">
+			<div class="col33" style="padding:15px;">
+				<i class="icon ion-cash" style="color:white;font-size:45px;" align="center">
+			    </i>
+		    </div>
+		    <div class="col" style="padding:5px;">
+			    <h4 style="color:white;">{{detventanu.pagUsu}}</h4>
+			    <a class="subdued" style="color:white;">Pago Total: <span>{{detventanu.monto | currency:'Bs. '}}</span></a>
+		    </div>
+		  </div>
+
+		  <div class="item item-body" style="margin:10px;">
+		  	<p style="color:rgba(0,0,0,0.6);margin:0px;padding:0px;">
+		      Detalles:
+		    </p>
+		    <div class="row" ng-repeat="articuol in histpag track by $index">
+		    	<div class="col">
+		    		<p  style="color:black;margin:0px;padding:0px;">
+			      {{articuol.coment}} 
+			    </p>
+		    	</div>
+		    	<div class="col">
+		    		<p  style="color:black;margin:0px;padding:0px;">
+			      {{articuol.precio | currency:'Bs. '}}
+			    </p>
+		    	</div>
+			    
+		    </div>
+		    <p>
+		    	<a class="subdued">{{detventanu.fectime}}</a>
+		      
+		      <a class="subdued">Estatus: {{detventanu.status | uppercase}}</a>
+		    </p>
+		  </div>
+		</div>
+		<div style="padding:10px;margin-top:0px!important;">
+	      <button class="button button-full base-positive" ng-click="anularsol(detventanu)" >
+	       Anular
+	      </button>
+	      <button type="submit" ng-click="recsolanu(detventanu)" class="button button-full" style="color:rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.1)!important;" >
+	       Rechazar
+	      </button>
+	    </div>
+	</ion-content >
+</ion-view>

@@ -2,12 +2,11 @@
 	<ion-spinner class="spinner2" icon="ripple"></ion-spinner>
 </div>
 <div class="list" style="margin-top:15px;">
-<a class="item hide" ng-class="{ 'fadein': countenl === 0 }">
-              <p class="tittext" style="color:rgba(0,0,0,0.6);">Nada que mostrar.</p>
-      </a>
-  <a class="item item-icon-left" ng-click="enlazar(enlace)" ng-repeat="enlace in dataEnlaces">
-    <i class="icon ion-email" style="font-size:40px;color:rgba(0,0,0,0.4);" ></i>
-    Solicitud de Enlace de: {{enlace.userId}}
-  </a>
-
+	<a class="item hide" ng-class="{ 'fadein': countenl === 0 }">
+		<p class="tittext" style="color:rgba(0,0,0,0.6);">Nada que mostrar.</p>
+	</a>
+	<a class="item item-icon-left" ng-click="detSol(enlace)" ng-repeat="enlace in dataEnlaces">
+		<i class="icon ion-email" style="font-size:40px;color:rgba(0,0,0,0.4);" ></i>
+		Solicitud de Enlace de: {{enlace.userId}}
+	</a>
 </div>

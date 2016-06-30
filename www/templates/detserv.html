@@ -11,8 +11,8 @@
 			    </i>
 		    </div>
 		    <div style="padding:5px;">
-			    <h4 style="color:white;">{{nomprod.nombre}}</h4>
-			    <a class="subdued" style="color:white;">Precio: <span>{{nomprod.precio}}Bs.</span></a>
+			    <h4 style="color:white;">{{nomserv.nombre}}</h4>
+			    <a class="subdued" style="color:white;">Precio: <span>{{nomserv.precio}}Bs.</span></a>
 		    </div>
 		  </div>
 
@@ -21,21 +21,21 @@
 		      Detalles:
 		    </p>
 		    <p style="color:black;margin:0px;padding:0px;">
-		      {{nomprod.detalle}}
+		      {{nomserv.detalle}}
 		    </p>
 		    <p>
 		    	<a class="subdued">November 05, 1955</a>
 		      
-		      <a class="subdued">Existencia: {{nomprod.existencia}}</a>
+		      <a class="subdued">Clasificacion: {{nomserv.clasificacion}}</a>
 		    </p>
 		  </div>
 		</div>
 		<div style="padding:10px;margin-top:0px!important;">
 	      
-	      <button class="button button-full base-positive" ng-click="editar(nomprod)">
+	      <button class="button button-full base-positive" ng-click="editars(nomserv)">
 	       Editar
 	      </button>
-	      <button type="submit" ng-click="elimprod(nomprod)" class="button button-full" style="color:rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.1)!important;" >
+	      <button type="submit" ng-click="elimserv(nomserv)" class="button button-full" style="color:rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.1)!important;" >
 	       Eliminar
 	      </button>
 	    </div>

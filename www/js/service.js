@@ -48,6 +48,38 @@ angular.module('starter.service', [])
  		return this.inventario;
  	}
 })
+.service('grafic', function(){
+ this.datgraf = [];
+ this.fecgraf = [];
+ this.serie = [];
+
+ 	this.giveitem = function(){
+
+ 		return this.datgraf.item;
+ 	}
+ 	this.giveservicio = function(){
+
+ 		return this.datgraf.servicio;
+ 	}
+ 	this.giveotros = function(){
+
+ 		return this.datgraf.otros;
+ 	}
+})
+.service('pag', function(){
+ this.ivap = 0;
+ this.tpagt = 0;
+
+ 	this.giveivap = function(){
+
+ 		return this.ivap;
+ 	}
+ 	this.givetpagt = function(){
+
+ 		return this.tpagt;
+ 	}
+
+})
 .service('histcob', function(){
  this.cob = [];
  this.cobext = [];
@@ -69,6 +101,14 @@ angular.module('starter.service', [])
  	this.giveDet = function(){
 
  		return this.detprod;
+ 	}
+})
+.service('aviso', function(){
+ this.av = 0;
+
+ 	this.giveav = function(){
+
+ 		return this.av;
  	}
 })
 .factory('socket',function(socketFactory){

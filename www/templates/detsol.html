@@ -1,0 +1,40 @@
+<ion-view view-title="Detalle Solicitud" style="background-color:rgba(0,0,0,0.05);">
+	<ion-nav-bar class="color-base border-b" align-title="left">
+      <ion-nav-back-button class="color-base">
+      </ion-nav-back-button> 
+  	</ion-nav-bar>
+  	<ion-content >
+  		<div class="list" style="margin-bottom:0px;">
+		  <div class="row base-positive">
+			<div style="padding:15px;">
+				<i class="icon ion-ios-person" style="color:white;font-size:45px;" align="center">
+			    </i>
+		    </div>
+		    <div style="padding:5px;padding-top:15px;">
+			    <h4 style="color:white;">{{detsol.userId}}</h4>
+		    </div>
+		  </div>
+
+		  <div class="item item-body" style="margin:10px;">
+		  	<p style="color:rgba(0,0,0,0.6);margin:0px;padding:0px;">
+		      Detalles:
+		    </p>
+		    <p style="color:black;margin:0px;padding:0px;">
+		      El usuario <strong>{{detsol.userId}}</strong> desea crear un enlace con la empresa <strong>{{detsol.idmaster}}</strong>.
+		    </p>
+		    <p>
+		    	<a class="subdued">November 05, 1955</a>
+		    </p>
+		  </div>
+		</div>
+		<div style="padding:10px;margin-top:0px!important;">
+	      
+	      <button class="button button-full base-positive" ng-click="enlazar(detsol)" >
+	       Aceptar
+	      </button>
+	      <button type="submit" ng-click="rechazar(detsol)" class="button button-full" style="color:rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.1)!important;" >
+	       Rechazar
+	      </button>
+	    </div>
+	</ion-content >
+</ion-view>

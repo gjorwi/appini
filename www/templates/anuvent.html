@@ -1,0 +1,29 @@
+<ion-view view-title="Anular venta" cache-view="false" >
+  <ion-nav-bar class="color-base border-b" align-title="left">
+      <ion-nav-buttons class="color-base" side="left" >
+        <button class="button icon ion-android-arrow-back button-clear color-base" class="button icon ion-android-arrow-back color-base" ng-click="avisar()"></button>
+      </ion-nav-buttons>  
+  </ion-nav-bar>
+  <div class="tabs-striped tabs-top base-positive tabs-color-light">
+    <div class="tabs base-positive">
+      <a class="tab-item active" ng-class="{ 'active': Swiper.activeIndex === 0 }" ng-click="slideTo(0)">
+        Solicitudes
+      </a>
+      <a class="tab-item" ng-class="{ 'active': Swiper.activeIndex === 1 }" ng-click="slideTo(1)">
+        Anuladas
+      </a>
+    </div>
+  </div>
+  <ion-content class="has-subheader">
+    <ion-slides slider="slider" options="options">
+      <ion-slide-page>
+        <div ng-include src="'templates/solventanu.html'">
+        </div>
+      </ion-slide-page>
+      <ion-slide-page>
+          <div ng-include src="'templates/ventanu.html'">
+          </div>
+      </ion-slide-page>
+    </ion-slides>
+  </ion-content>
+</ion-view>

@@ -3,7 +3,7 @@
       <ion-nav-back-button class="wt">
       </ion-nav-back-button>
 	    <ion-nav-buttons side="right" >
-	      <button class="button icon ion-upload button-clear" ng-class="{ 'hide': check.val == true }" style="color:white;" ng-click="regProd()"> 
+	      <button class="button icon ion-upload button-clear" ng-class="{ 'hide': check.val == true }" style="color:white;" ng-click="regServ()"> 
 	      </button>
 	    </ion-nav-buttons>
   	</ion-nav-bar>
@@ -24,19 +24,19 @@
 		  -->
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Nombre</span>
-		    <input type="text" ng-model="regprod.nombre">
+		    <input type="text" ng-model="regserv.nombre">
 		  </label>
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Precio</span>
-		    <input type="tel" ng-model="regprod.precio" ng-keyup="transf()">
+		    <input type="tel" ng-model="regserv.precio">
 		  </label>
 		  <label class="item item-input" style="padding:15px 15px;">
-		    <span class="input-label">Descuento</span>
-		    <input type="text" ng-model="regprod.descuento">%
+		    <span class="input-label">Clasificacion</span>
+		    <input type="text" ng-model="regserv.clasificacion">
 		  </label>
 		  <label class="item item-input" style="padding:15px 15px;">
 		    <span class="input-label">Caracteristicas</span>
-		    <textarea type="text" ng-model="regprod.detalle"></textarea>
+		    <textarea type="text" ng-model="regserv.detalle"></textarea>
 		  </label>
 		</div>
 	</ion-content>

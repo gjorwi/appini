@@ -30,7 +30,7 @@
 	<ion-spinner class="spinner2" icon="ripple"></ion-spinner>
 </div>
 <div class="list" >
-	<a class="item hide" ng-class="{ 'fadein': counprod === 0 }">
+	<a class="item hide" ng-class="{ 'fadein': counprod === 0 && tipo==='producto'}">
 	    <p class="tittext" style="color:rgba(0,0,0,0.5);">No se ha registrado ningun producto... </p>
   	</a>
     <a class="item hide" ng-class="{ 'fadein': tipo === 'producto' }"  ng-repeat="producto in dataVentas" ng-click="detalle(producto)">
@@ -47,19 +47,19 @@
 	    	<p class="mp-text">- {{producto.descuento}}%</p>
 	    </div>
   	</a>
-  	<a class="item hide" ng-class="{ 'fadein': tipo === 'servicio' }" ng-repeat="producto in productos | filter:{categoria:srcinv}" href="#/app/detalle">
-	    <i class="icon base-positive icon-caja" align="center">
-	    	<input type="hidden" value="venta.elem"></input>
-		    <h3 style="color:white;">{{producto.idpro}}</h3>
+  	<a class="item hide" ng-class="{ 'fadein': counserv === 0 && tipo==='servicio'}">
+	    <p class="tittext" style="color:rgba(0,0,0,0.5);">No se ha registrado ningun servicio... </p>
+  	</a>
+  	<a class="item hide" ng-class="{ 'fadein': tipo === 'servicio' }" ng-click="detalleserv(servicio)" ng-repeat="servicio in dataServ" >
+	    <i class="icon icon-caja" align="center" style="padding-top:0px;">
+	    	<i class="icon ion-bag color-base" style="font-size:35px;"></i>
 	    </i>
 	    <div style="float:left;">
-	    	<p class="tittext">{{producto.nompro}}</p>
-	    	<p class="subtext">Bs. {{producto.precio}}</p>
+	    	<p class="tittext">{{servicio.nombre}}</p>
+	    	<p class="subtext">Bs. {{servicio.precio}}</p>
 	    </div>
 	    <div style="margin-top:-5px;float:right;">
-	    	<p class="p-text">{{producto.existencia}}</p>
-	    	<p class="mp-text">{{producto.categoria}}</p>
-	    	<p class="mp-text">- {{producto.descuento}}</p>
+	    	<p class="p-text">{{servicio.clasificacion}}</p>
 	    </div>
   	</a>
 

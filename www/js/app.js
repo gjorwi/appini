@@ -107,8 +107,21 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
         }
       }
     })
+    .state('app.anuladas', {
+      url: '/menuprin/anuladas',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/anuvent.html',
+          controller: 'Anuladas'
+        }
+      }
+    })
     .state('app.regpro', {
       url: '/inventario/producto',
+      params:{
+        datprod:{ dynamic: true }
+      }
+      ,
       views: {
         'menuContent': {
           templateUrl: 'templates/registropro.html',
@@ -126,7 +139,7 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
       }
     })
     .state('app.detinvent', {
-      url: '/inventario/detalles',
+      url: '/inventario/detalles/producto',
       params:{
         producto:{ dynamic: true }
       }
@@ -138,17 +151,77 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
         }
       }
     })
+    .state('app.detserv', {
+      url: '/inventario/detalles/servicio',
+      params:{
+        servicio:{ dynamic: true }
+      }
+      ,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/detserv.html',
+          controller: 'Detalles'
+        }
+      }
+    })
+    .state('app.detventanu', {
+      url: '/menuprin/anuladas/anudetalle',
+      params:{
+        ventanu:{ dynamic: true }
+      }
+      ,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/detventanu.html',
+          controller: 'Detalles'
+        }
+      }
+    })
+    .state('app.detSol', {
+      url: '/cajas/soldetalle',
+      params:{
+        caja:{ dynamic: true }
+      }
+      ,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/detsol.html',
+          controller: 'Detalles'
+        }
+      }
+    })
+    .state('app.detventa', {
+      url: '/menuprin/ventdetalle',
+      params:{
+        venta:{ dynamic: true }
+      }
+      ,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/detventa.html',
+          controller: 'Detalles'
+        }
+      }
+    })
     .state('app.regser', {
       url: '/inventario/servicio',
+      params:{
+        datserv:{ dynamic: true }
+      }
+      ,
       views: {
         'menuContent': {
           templateUrl: 'templates/registroser.html',
-          controller: 'Regpro'
+          controller: 'Regserv'
         }
       }
     })
     .state('app.genCob', {
       url: '/menuprin/generarcob',
+      params:{
+        not:'ok'
+      }
+      ,
       views: {
         'menuContent': {
           templateUrl: 'templates/generarcob.html',
@@ -158,6 +231,10 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
     })
     .state('app.qrGen', {
       url: '/menuprin/generarcob/qr',
+      params:{
+        datpag:{ dynamic: true }
+      }
+      ,
       views: {
         'menuContent': {
           templateUrl: 'templates/qrgen.html',
@@ -167,6 +244,10 @@ angular.module('starter', ['chart.js','ionic', 'starter.controllers','starter.se
     })
     .state('app.resumen', {
       url: '/resumen',
+      params:{
+        not:'ok'
+      }
+      ,
       views: {
         'menuContent': {
           templateUrl: 'templates/resumen.html',

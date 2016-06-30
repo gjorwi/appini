@@ -1,0 +1,51 @@
+<ion-view view-title="Detalle Venta" style="background-color:rgba(0,0,0,0.05);">
+	<ion-nav-bar class="color-base border-b" align-title="left">
+      <ion-nav-buttons class="color-base" side="left" >
+      	<button class="button icon ion-android-arrow-back button-clear color-base" class="button icon ion-android-arrow-back color-base" ng-click="avisar()"></button>
+      </ion-nav-buttons>  
+  	</ion-nav-bar>
+  	<ion-content >
+  		<div class="list" style="margin-bottom:0px;">
+		  <div class="row base-positive">
+			<div class="col33" style="padding:15px;">
+				<i class="icon ion-cash" style="color:white;font-size:45px;" align="center">
+			    </i>
+		    </div>
+		    <div class="col" style="padding:5px;">
+			    <h4 style="color:white;">{{detventa.pagUsu}}</h4>
+			    <a class="subdued" style="color:white;">Pago Total: <span>{{detventa.monto | currency:'Bs. '}}</span></a>
+		    </div>
+		  </div>
+
+		  <div class="item item-body" style="margin:10px;">
+		  	<p style="color:rgba(0,0,0,0.6);margin:0px;padding:0px;">
+		      Detalles:
+		    </p>
+		    <div class="row" ng-repeat="articuol in histpag track by $index">
+		    	<div class="col">
+		    		<p  style="color:black;margin:0px;padding:0px;">
+			      {{articuol.coment}} 
+			    </p>
+		    	</div>
+		    	<div class="col">
+		    		<p  style="color:black;margin:0px;padding:0px;">
+			      {{articuol.precio | currency:'Bs. '}}
+			    </p>
+		    	</div>
+			    
+		    </div>
+		    <p>
+		    	<a class="subdued">{{detventa.fectime}}</a>
+		      
+		      <a class="subdued">Estatus: {{detventa.status | uppercase}}</a>
+		    </p>
+		  </div>
+		</div>
+		<div style="padding:10px;margin-top:0px!important;">
+	      <button  class="button button-full base-positive hide" ng-click="anular(detventa)" ng-class="{ 'fadein': detventa.status === 'pagado' }"  >
+	       Anular
+	      </button>
+
+	    </div>
+	</ion-content >
+</ion-view>

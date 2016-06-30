@@ -12,17 +12,49 @@
 	    </div>
 	  </div>
 	</div>
-	<ion-content style="margin-top:80px;padding-top:0px!important;">
-		<div class="list list-inset" style="margin">
+	<ion-content class="has-footer" style="bottom:120px!important;margin-top:80px;padding-top:0px!important;">
+		<div class="list" style="padding:5px!important;">
 			<a class="item hide" ng-class="{ 'fadein': counthist === 0 }">
 	            <p class="tittext" style="color:rgba(0,0,0,0.5);">Nada que mostrar.</p>
 			</a>
-		  <div class="item item-button-right" ng-repeat="historial in histPagoext" >
-			{{historial.precio | currency:'Bs. '}} <span style="font-size:14px;color:#666;">{{historial.coment}}</span>
-		    <button class="button button-assertive" ng-click="deletCob(historial)">
-		      <i class="icon ion-close-round"></i>
-		    </button>
+		  <div class="row" ng-repeat="historial in histPagoext" style="margin-bottom:10px!important;border-bottom:1px solid rgba(0,0,0,0.1);background-color:white;">
+		  	<div ng-click="deletCob(historial)" style="width:40px!important;background-color:;padding:10px;">
+		  		<i class="icon ion-close-round" style="font-size:16px;color:red;"></i>
+		  	</div>
+		  	<div class="col text-left" style="padding:10px 5px;">
+		  		<p style="padding:0px;margin:0px;"><span style="font-size:14px;color:#666;">{{historial.coment}}</span></p>
+		  	</div>
+		  	<div class="col text-right" style="padding:10px 5px;">
+		  		<p style="padding:0px;margin:0px;color:rgba(0,0,0,0.5);">{{historial.precio | currency:'Bs. '}}
+		  	</div>
 		  </div>
+		 
 		</div>
 	</ion-content>
+	<div class="bar bar-footer" style="height:120px;display:block;background-color:white;border-top:1px solid #DD2651;">
+	  <div class="row">
+	  	<div class="col text-left subtot" >
+	  		<p style="color:rgba(0,0,0,0.7);font-size:18px;padding:0px;margin:0px;">Sub Total:</p>
+	  	</div>
+	  	<div class="col text-right subtot">
+	  		<p class="font-rc" style="color:rgba(0,0,0,0.5);font-weight:bold;padding:0px;margin:0px;">{{totalPagototal | currency:'Bs. '}}</p>
+	  	</div>
+	  </div>
+	  <div class="row" >
+	  	<div class="col text-left subtot" >
+	  		<p style="color:rgba(0,0,0,0.7);font-size:18px;padding:0px;margin:0px;">IVA (12%):</p>
+	  	</div>
+	  	<div class="col text-right subtot" >
+	  		<p class="font-rc" style="color:rgba(0,0,0,0.5);font-weight:bold;padding:0px;margin:0px;">{{ivaPago | currency:'Bs. '}}</p>
+	  	</div>
+	  </div>
+	  <div class="row" >
+	  	<div class="col text-left subtot" >
+	  		<p style="color:rgba(0,0,0,0.7);font-weight:bold;font-size:18px;padding:0px;margin:0px;">Total:</p>
+	  	</div>
+	  	<div class="col text-right subtot" >
+	  		<p  style="color:rgba(0,0,0,0.7);font-weight:bold;padding:0px;margin:0px;">{{totalPago | currency:'Bs. '}}</p>
+	  	</div>
+	  </div>
+	</div>
 </ion-view>
